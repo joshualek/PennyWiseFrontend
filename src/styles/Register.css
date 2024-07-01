@@ -1,0 +1,72 @@
+/* General container styling */
+.register-container {
+    max-width: 400px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Form styling */
+.register-form {
+    display: flex;
+    flex-direction: column;
+}
+
+/* Form group styling */
+.form-group {
+    margin-bottom: 15px;
+}
+
+/* Input styling */
+.register-form input {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    margin-bottom: 15px;
+}
+
+/* Button styling */
+.btn {
+    padding: 10px;
+    text-align: center;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    color: #fff;
+    background-color: #343a40;
+    margin-top: 10px;
+}
+
+.btn--dark {
+    background-color: #343a40;
+}
+
+.btn--dark:hover {
+    background-color: #23272b;
+}
+
+/* Error message styling */
+.error {
+    color: red;
+    margin-top: 10px;
+}
+
+/* Additional spacing */
+.additional-spacing {
+    margin-top: 20px;
+}
+
+/* Smaller text for the link */
+.small-text {
+    font-size: 0.875rem;
+    color: #666;
+}
+
+/* Heading styling */
+.register-container h1 {
+    font-size: 2em; /* You can adjust this value to change the size */
+    color: #333;   /* Optional: Set a color for the heading */
+    margin-bottom: 20px; /* Optional: Add some space below the heading */
+}
