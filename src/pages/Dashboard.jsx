@@ -10,8 +10,11 @@ import Sidebar from "../components/Sidebar"
 import Nav from "../components/Nav"
 import AddBudgetForm from "../components/AddBudgetForm"
 import AddExpenseForm from "../components/AddExpenseForm"
+import AddIncomeForm from "../components/AddIncomeForm"
 import BudgetItem from "../components/BudgetItem"
+import IncomeItem from "../components/IncomeItem"
 import Table from "../components/Table"
+import IncomeTable from "../components/IncomeTable"
 
 // Pages
 import Intro from "../pages/Intro"
@@ -24,7 +27,7 @@ import api from "../api"
 import { getAccessToken } from "../utils/auth"
 
 // Helper functions
-import { createBudget, createExpense, fetchData, fetchDataDjango } from "../helpers"
+import { createBudget, createExpense, createIncome, fetchData, fetchDataDjango } from "../helpers"
 
 // Heroicons
 import { Bars3Icon } from '@heroicons/react/24/solid'
@@ -33,7 +36,8 @@ export async function dashboardLoader() {
     const userName = await fetchData("userName");
     const budgets = await fetchDataDjango("budgets/");
     const expenses = await fetchDataDjango("expenses/");
-    return { userName, budgets, expenses };
+    const income = await fetchDataDjango("income/")
+    return { userName, budgets, expenses, income };
 }
 
 export async function dashboardAction({ request }) {
@@ -77,10 +81,26 @@ export async function dashboardAction({ request }) {
     if (_action === "deleteExpense") {
         return null;
     }
+
+    if (_action === "createIncome") {
+        try {
+            await createIncome({
+                name: values.newIncome,
+                amount: values.newIncomeAmount,
+            })
+            return toast.success(`Income created successfully`)
+        } catch (e) {
+            throw new Error("There was a problem creating your Income.")
+        }
+    }
+
+    if (_action === "deleteIncome") {
+        return null;
+    }
 }
 
 const Dashboard = () => {
-    const { userName, budgets, expenses } = useLoaderData()
+    const { userName, budgets, expenses, income } = useLoaderData()
     // useEffect(() => {
     //     getBudgets();
     // }, []);
@@ -107,7 +127,7 @@ const Dashboard = () => {
     //         .catch((error) => alert(error));
     // };
 
-    console.log("Rendering Dashboard with data:", { userName, budgets, expenses });
+    console.log("Rendering Dashboard with data:", { userName, budgets, expenses, income });
 
     const [sidebarVisible, setSidebarVisible] = useState(true);
 
@@ -131,6 +151,7 @@ const Dashboard = () => {
                                     <div className="forms-container">
                                         <AddBudgetForm />
                                         <AddExpenseForm budgets={budgets} />
+                                        <AddIncomeForm />
                                     </div>
                                     <h2>Existing Budgets</h2>
                                     <div className="budgets">
@@ -151,6 +172,22 @@ const Dashboard = () => {
                                             {expenses.length > 0 && (
                                                 <Link to="/expenses" className="btn btn--dark">
                                                     View all expenses
+                                                </Link>
+                                            )}
+                                        </div>
+                                    )}
+                                    {income && income.length > 0 && (
+                                        <div className="grid-md">
+
+                                            <h2>Recent Income</h2>
+                                            <IncomeTable
+                                                income={income
+                                                    .sort((a, b) => b.createdAt - a.createdAt)
+                                                    .slice(0, 8)}
+                                            />
+                                            {income.length > 0 && (
+                                                <Link to="/income" className="btn btn--dark">
+                                                    View all income
                                                 </Link>
                                             )}
                                         </div>

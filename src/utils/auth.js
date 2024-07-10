@@ -17,7 +17,7 @@ export const getAccessToken = () => {
 // Function to handle login
 export const login = async (username, password) => {
     try {
-        const response = await fetch("https://pennywisebackend.onrender.com/api/token/", {
+        const response = await fetch("http://127.0.0.1:8000/api/token/", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -42,7 +42,7 @@ export const login = async (username, password) => {
 // Function to handle registration
 export const register = async (username, password) => {
     try {
-        const response = await fetch("https://pennywisebackend.onrender.com/api/user/register/", {
+        const response = await fetch("http://127.0.0.1:8000/api/user/register/", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",

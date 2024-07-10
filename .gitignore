@@ -1,0 +1,14 @@
+node_modules
+__pycache__
+.cache
+
+# Static
+staticfiles/
+static/
+
+# Local environment
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/

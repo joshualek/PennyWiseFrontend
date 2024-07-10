@@ -1,14 +1,15 @@
-import ExpenseItem from "./ExpenseItem"
+import IncomeItem from "./IncomeItem"
 
 
-export const Table = ({ expenses, expenseId }) => {
+
+export const IncomeTable = ({ income, incomeId}) => {
     return (
         <div className="table">
             <table>
                 <thead>
                     <tr>
                         {
-                            ["Name", "Amount", "Date", "Budget"].map((header, index) => (
+                            ["Name", "Amount", "Date"].map((header, index) => (
                                 <th key={index}>{header}</th>
                             ))
                         }
@@ -16,9 +17,9 @@ export const Table = ({ expenses, expenseId }) => {
                 </thead>
                 <tbody>
                     {
-                        expenses.map((expense) => (
-                            <tr key={expense.id}>
-                                <ExpenseItem expense={expense} expenseId={expenseId}/>
+                        income.map((income) => (
+                            <tr key={income.id}>
+                                <IncomeItem income={income} incomeId={incomeId}/>
                             </tr>    
                         ))
                     }
@@ -28,4 +29,4 @@ export const Table = ({ expenses, expenseId }) => {
     )
 }
 
-export default Table
+export default IncomeTable

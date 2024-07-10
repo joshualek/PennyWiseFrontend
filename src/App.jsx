@@ -16,6 +16,7 @@ import ProtectedRoute from "./components/ProtectedRoute";
 import Dashboard, { dashboardAction, dashboardLoader } from "./pages/Dashboard";
 import BudgetPage, { budgetAction, budgetLoader } from "./pages/BudgetPage";
 import ExpensesPage, { expensesAction, expensesLoader } from "./pages/ExpensesPage";
+import IncomePage, {incomeAction, incomeLoader } from "./pages/IncomePage";
 import Intro from "./pages/Intro";
 import Error from "./pages/Error";
 import Register from "./pages/Register";
@@ -76,6 +77,14 @@ const router = createBrowserRouter([
         element: <ExpensesPage />,
         loader: expensesLoader,
         action: expensesAction,
+        errorElement: <Error />
+      },
+
+      {
+        path: "income",
+        element: <IncomePage />,
+        loader: incomeLoader,
+        action: incomeAction,
         errorElement: <Error />
       },
     ]
