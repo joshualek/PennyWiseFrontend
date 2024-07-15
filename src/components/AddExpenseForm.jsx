@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import { useFetcher } from 'react-router-dom'
 
 // library
@@ -6,6 +6,12 @@ import { PlusCircleIcon } from '@heroicons/react/24/solid'
 
 const AddExpenseForm = ({ budgets }) => {
     const fetcher = useFetcher()
+    const [categories] = useState([
+        {id: 1, name: 'Food' },
+        {id: 2, name: 'Transport' },
+        {id: 3, name: 'Shopping' },
+        {id: 4, name: 'Others' },
+    ]);
     const isSubmitting = fetcher.state === "submitting"
     const formRef = useRef()
     const focusRef = useRef()
@@ -61,6 +67,17 @@ const AddExpenseForm = ({ budgets }) => {
                                     )
                                 })
                         }
+                    </select>
+                </div>
+                <div className="grid-xs">
+                    <label htmlFor="newExpenseCategory">Category</label>
+                    <select name="newExpenseCategory" id="newExpenseCategory" required>
+                        <option value="">Select a category</option>
+                        {categories.map((category) => (
+                            <option key={category.id} value={category.id}>
+                                {category.name}
+                            </option>
+                        ))}
                     </select>
                 </div>
                 <input type="hidden" name="_action" value="createExpense" />

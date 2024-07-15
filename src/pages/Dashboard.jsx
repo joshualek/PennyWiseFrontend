@@ -58,6 +58,7 @@ export async function dashboardAction({ request }) {
             await createBudget({
                 name: values.newBudget,
                 amount: values.newBudgetAmount,
+            
             })
             return toast.success(`Budget created successfully`)
         } catch (e) {
@@ -71,6 +72,7 @@ export async function dashboardAction({ request }) {
                 name: values.newExpense,
                 amount: values.newExpenseAmount,
                 budget: values.newExpenseBudget,
+                category: values.newExpenseCategory,
             })
             return toast.success(`Expense ${values.newExpense} created successfully`)
         } catch (e) {
@@ -100,7 +102,7 @@ export async function dashboardAction({ request }) {
 }
 
 const Dashboard = () => {
-    const { userName, budgets, expenses, income } = useLoaderData()
+    const { userName, budgets, expenses, income, category } = useLoaderData()
     // useEffect(() => {
     //     getBudgets();
     // }, []);
@@ -127,7 +129,7 @@ const Dashboard = () => {
     //         .catch((error) => alert(error));
     // };
 
-    console.log("Rendering Dashboard with data:", { userName, budgets, expenses, income });
+    console.log("Rendering Dashboard with data:", { userName, budgets, expenses, income, category });
 
     const [sidebarVisible, setSidebarVisible] = useState(true);
 

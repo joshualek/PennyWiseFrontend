@@ -117,7 +117,7 @@ export const getBudgetsArray = async () => {
 };
 // create budget in Dashboard.jsx
 // category might not be needed
-export async function createBudget({ name, amount }) {
+export async function createBudget({ name, amount}) {
   try {
     const token = localStorage.getItem(ACCESS_TOKEN);
     const response = await fetch("http://127.0.0.1:8000/api/budgets/", {
@@ -127,10 +127,12 @@ export async function createBudget({ name, amount }) {
         ...(token && { Authorization: `Bearer ${token}` }),
         
       },
-      body: JSON.stringify({ name, amount }),
+      body: JSON.stringify({ name, amount}),
     });
     
     if (!response.ok) {
+      const errorDetails = await response.json();
+      console.error('failed to add budget,', errorDetails)
       throw new Error('Failed to create budget');
     }
     
@@ -176,13 +178,14 @@ export async function createBudget({ name, amount }) {
 //   }
 // };
 
-export const createExpense = async ({ name, amount, budget }) => {
+export const createExpense = async ({ name, amount, budget, category}) => {
   const accessToken = localStorage.getItem(ACCESS_TOKEN);
   const newItem = {
     name: name,
     created_at: Date.now(),
     amount: +amount,
     budget: budget,
+    category: category,
   };
 
   const response = await fetch("http://127.0.0.1:8000/api/expenses/", {

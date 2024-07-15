@@ -658,3 +658,15 @@ table a {
 .Toastify__toast-body {
   font-size: var(--fs-300);
 }
+
+.category-label {
+  margin-top: 4px;
+  padding: 2px 8px;
+  border: 1px solid;
+  border-radius: 12px;
+  font-size: 0.9rem;
+  display: inline-block;
+  color: #fff;
+  background-color: transparent;
+  max-width: fit-content;
+}

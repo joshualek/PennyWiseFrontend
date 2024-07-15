@@ -48,6 +48,7 @@ const AddBudgetForm = () => {
     const formRef = useRef()
     const focusRef = useRef()
 
+
     useEffect(() => {
         if (!isSubmitting) { // clears the form when fetcher.state is not submitting
             formRef.current.reset()
