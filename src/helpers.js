@@ -19,7 +19,7 @@ export const fetchData = (key) => {
 //   }
 // };
 export async function fetchDataDjango(endpoint, options = {}) {
-  const url = `https://pennywisebackend.onrender.com/api/${endpoint}`; // Construct the full URL
+  const url = `http://127.0.0.1:8000/api/${endpoint}`; // Construct the full URL
 
   const token = localStorage.getItem(ACCESS_TOKEN); // Retrieve the token
 
@@ -120,7 +120,7 @@ export const getBudgetsArray = async () => {
 export async function createBudget({ name, amount }) {
   try {
     const token = localStorage.getItem(ACCESS_TOKEN);
-    const response = await fetch('https://pennywisebackend.onrender.com/api/budgets/', {
+    const response = await fetch("http://127.0.0.1:8000/api/budgets/", {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -185,7 +185,7 @@ export const createExpense = async ({ name, amount, budget }) => {
     budget: budget,
   };
 
-  const response = await fetch('https://pennywisebackend.onrender.com/api/expenses/', {
+  const response = await fetch("http://127.0.0.1:8000/api/expenses/", {
     method: 'POST',
     headers: {
       'Authorization': `Bearer ${accessToken}`,
@@ -197,7 +197,37 @@ export const createExpense = async ({ name, amount, budget }) => {
   if (!response.ok) {
     throw new Error('Failed to create expense');
   }
+
+
 };
+
+export const createIncome = async ({ name, amount}) => {
+  try {
+    const token = localStorage.getItem(ACCESS_TOKEN);
+    const response = await fetch("http://127.0.0.1:8000/api/income/", {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        ...(token && { Authorization: `Bearer ${token}` }),
+        
+      },
+      body: JSON.stringify({ name, amount }),
+    });
+    
+    if (!response.ok) {
+      const errorDetails = await response.json();
+      console.error('failed to add income,', errorDetails)
+      throw new Error('Failed to add income');
+    }
+    
+    const data = await response.json();
+    return data; // Return the created income or relevant data
+  } catch (error) {
+    console.error('Error creating income:', error);
+    throw error; // Rethrow the error to be handled by the caller
+  }
+};
+
 
 // export const createBudget = (e, amount, name) => {
 //   e.preventDefault();
@@ -282,7 +312,7 @@ export const createExpense = async ({ name, amount, budget }) => {
 
 // delete item from local storage
 export async function deleteItem(endpoint) {
-  const url = `https://pennywisebackend.onrender.com/api/${endpoint}`; // Construct the full URL
+  const url = `http://127.0.0.1:8000/api/${endpoint}`; // Construct the full URL
 
   const token = localStorage.getItem(ACCESS_TOKEN); // Retrieve the token
 
