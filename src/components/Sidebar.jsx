@@ -12,7 +12,7 @@ const Sidebar = ({ isVisible }) => {
             <nav>
                 <ul>
                     <li>
-                        <Link to="/dashboard" className="menu-link">
+                        <Link to="/home" className="menu-link">
                             <HomeIcon width={24} />
                             <span></span>
                         </Link>

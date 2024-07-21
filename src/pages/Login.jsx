@@ -20,7 +20,7 @@ const Login = () => {
         if (result.success) {
             localStorage.setItem("userName", JSON.stringify(loginData.username))
             console.log("Stored Username", localStorage.getItem("userName"))
-            navigate("/dashboard");
+            navigate("/home");
         } else {
             setError("Login failed. Please check your credentials.");
         }

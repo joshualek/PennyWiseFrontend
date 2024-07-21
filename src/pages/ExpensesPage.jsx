@@ -1,5 +1,5 @@
 import React, { useState } from "react"
-import { useLoaderData } from "react-router-dom"
+import { Link, useLoaderData } from "react-router-dom"
 
 // library
 import { toast } from "react-toastify"
@@ -60,6 +60,10 @@ const ExpensesPage = () => {
                             </div>
                         ) : <p>No expenses found</p>
                         }
+                </div>
+                <div className="flex-sm">
+                    <Link to="/home" className="btn btn--primary">Back to Home</Link>
+                    <Link to="/dashboard" className="btn btn--primary">Back to Dashboard</Link>
                 </div>
             </div>
         </div>

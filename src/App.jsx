@@ -16,6 +16,7 @@ import ProtectedRoute from "./components/ProtectedRoute";
 import Dashboard, { dashboardAction, dashboardLoader } from "./pages/Dashboard";
 import BudgetPage, { budgetAction, budgetLoader } from "./pages/BudgetPage";
 import ExpensesPage, { expensesAction, expensesLoader } from "./pages/ExpensesPage";
+import Home, { homeAction, homeLoader } from "./pages/Home"
 import IncomePage, {incomeAction, incomeLoader } from "./pages/IncomePage";
 import Intro from "./pages/Intro";
 import Error from "./pages/Error";
@@ -44,6 +45,17 @@ const router = createBrowserRouter([
       {
         path: "logout",
         action: logoutAction
+      },
+      {
+        path: "home",
+        element: ( <Home />
+          // <ProtectedRoute>
+          //   <Home />
+          // </ProtectedRoute>
+        ),
+        loader: homeLoader,
+        action: homeAction,
+        errorElement: <Error />
       },
       {
         path: "dashboard",

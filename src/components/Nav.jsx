@@ -9,7 +9,7 @@ import { LockClosedIcon } from "@heroicons/react/24/outline"
 const Nav = ({ userName }) => {
     return (
         <nav>
-            <NavLink to="/dashboard" aria-label="Go to PennyWi$e Home">
+            <NavLink to="/home" aria-label="Go to PennyWi$e Home">
                 <img src={logomark} alt="logo" height={30} />
                 <span className="accent">PennyWi$e</span>
             </NavLink> 

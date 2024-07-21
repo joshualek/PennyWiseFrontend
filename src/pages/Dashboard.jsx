@@ -144,7 +144,6 @@ const Dashboard = () => {
                     </button>
                     <div className={`dashboard ${sidebarVisible ? '' : 'dashboard-expanded'}`}>
                         <Nav userName={userName} />
-                        <h1>Welcome, <span className="accent">{userName}</span></h1>
                         <div className="grid-sm">
                             {budgets && budgets.length > 0 ? (
                                 <div className="grid-lg">
@@ -155,7 +154,6 @@ const Dashboard = () => {
                                     </div>
                                     <h2>Existing Budgets</h2>
                                     <div className="budgets">
-
                                         {budgets.map((budget) => (
                                             <BudgetItem key={budget.id} budget={budget} />
                                         ))}

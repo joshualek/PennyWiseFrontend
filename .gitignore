@@ -1,10 +1,5 @@
 node_modules
-<<<<<<< HEAD
-__pycache__/
-*.py[cod]
-=======
 __pycache__
->>>>>>> origin/goi-frontend
 .cache
 
 # Static
@@ -16,9 +11,4 @@ env/
 venv/
 ENV/
 env.bak/
-<<<<<<< HEAD
 venv.bak/
-node_modules
-=======
-venv.bak/
->>>>>>> origin/goi-frontend

@@ -23,7 +23,7 @@ export async function incomeLoader() {
 }
 
 // Action
-export async function incomeAction({request}) {
+export async function incomeAction({ request }) {
     const data = await request.formData()
     const { _action, ...values } = Object.fromEntries(data)
     if (_action === "deleteIncome") {
@@ -46,7 +46,7 @@ const IncomePage = () => {
         <div className="dashboard-container">
             <Sidebar isVisible={sidebarVisible} />
             <div className={`dashboard ${sidebarVisible ? '' : 'dashboard-expanded'}`}>
-                <Nav userName={userName}/>
+                <Nav userName={userName} />
                 <button className="toggle-sidebar-btn" onClick={toggleSidebar}>
                     <Bars3Icon />
                 </button>
@@ -59,11 +59,14 @@ const IncomePage = () => {
                                 <IncomeTable income={income} />
                             </div>
                         ) : <p>No recent income</p>
-                        }
-                        <Link to="/dashboard" className="btn btn--primary">Back to Home</Link>
+                    }
+                    <div className="flex-sm">
+                        <Link to="/home" className="btn btn--primary">Back to Home</Link>
+                        <Link to="/dashboard" className="btn btn--primary">Back to Dashboard</Link>
                     </div>
                 </div>
             </div>
+        </div>
     )
 }
 
