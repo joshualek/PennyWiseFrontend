@@ -17,6 +17,8 @@ import Dashboard, { dashboardAction, dashboardLoader } from "./pages/Dashboard";
 import BudgetPage, { budgetAction, budgetLoader } from "./pages/BudgetPage";
 import ExpensesPage, { expensesAction, expensesLoader } from "./pages/ExpensesPage";
 import IncomePage, {incomeAction, incomeLoader } from "./pages/IncomePage";
+import AnalyticsPage, {analyticsLoader} from "./pages/AnalyticsPage";
+import Home, { homeAction, homeLoader } from "./pages/Home"
 import Intro from "./pages/Intro";
 import Error from "./pages/Error";
 import Register from "./pages/Register";
@@ -44,6 +46,17 @@ const router = createBrowserRouter([
       {
         path: "logout",
         action: logoutAction
+      },
+      {
+        path: "home",
+        element: ( <Home />
+          // <ProtectedRoute>
+          //   <Home />
+          // </ProtectedRoute>
+        ),
+        loader: homeLoader,
+        action: homeAction,
+        errorElement: <Error />
       },
       {
         path: "dashboard",
@@ -85,6 +98,13 @@ const router = createBrowserRouter([
         element: <IncomePage />,
         loader: incomeLoader,
         action: incomeAction,
+        errorElement: <Error />
+      },
+
+      {
+        path: "analytics",
+        element: <AnalyticsPage />,
+        loader: analyticsLoader,
         errorElement: <Error />
       },
     ]

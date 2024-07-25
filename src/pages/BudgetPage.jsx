@@ -18,13 +18,13 @@ import { calculateSpentByBudget, createExpense, fetchData, fetchDataDjango, fetc
 import { Bars3Icon } from '@heroicons/react/24/solid'
 
 // Loader function to tell react router dom how to load the data (in this case Dashboard)
-export async function budgetLoader({params}) {
+export async function budgetLoader({ params }) {
     const userName = await fetchData("userName");
     // Fetch the budget using the budget's id
     const budget = await fetchDataDjango(`budgets/${params.id}/`);
     // Fetch expenses related to the specified budget's id
     const expenses = await fetchExpensesByBudgetId(params.id);
-    
+
     if (!budget) {
         throw new Error("Budget not found");
     }
@@ -33,7 +33,7 @@ export async function budgetLoader({params}) {
 }
 
 // Action
-export async function budgetAction({request}) {
+export async function budgetAction({ request }) {
     const data = await request.formData()
     const { _action, ...values } = Object.fromEntries(data)
 
@@ -49,7 +49,7 @@ export async function budgetAction({request}) {
             throw new Error("There was a problem creating your expense.")
         }
     }
-    
+
     if (_action === "deleteExpense") {
         return null;
     }
@@ -76,8 +76,8 @@ const BudgetPage = () => {
 
     useEffect(() => {
         const fetchSpentAmount = async () => {
-        const spentAmount = await calculateSpentByBudget(id);
-        setSpent(spentAmount);
+            const spentAmount = await calculateSpentByBudget(id);
+            setSpent(spentAmount);
         };
 
         fetchSpentAmount();
@@ -100,12 +100,12 @@ const BudgetPage = () => {
                     <button className="toggle-sidebar-btn" onClick={toggleSidebar}>
                         <Bars3Icon />
                     </button>
-                    <div className="grid-lg" style={{"--accent": accentColor}}>
+                    <div className="grid-lg" style={{ "--accent": accentColor }}>
                         <h1 className="h2">
                             <span className="accent">{budget.name}</span> Overview
                         </h1>
                         <div className="flex-lg">
-                            <BudgetItem budget={budget} showDelete={true} expensesCounter={expensesCounter}/>
+                            <BudgetItem budget={budget} showDelete={true} expensesCounter={expensesCounter} />
                             <AddExpenseForm budgets={[budget]} />
                         </div>
                         {
@@ -118,7 +118,10 @@ const BudgetPage = () => {
                                 </div>
                             ) : <p>No expenses found</p>
                         }
-                        <Link to="/dashboard" className="btn btn--primary">Back to Home</Link>
+                        <div className="flex-sm">
+                            <Link to="/home" className="btn btn--primary">Back to Home</Link>
+                            <Link to="/dashboard" className="btn btn--primary">Back to Dashboard</Link>
+                        </div>
                     </div>
                 </div>
             </div>

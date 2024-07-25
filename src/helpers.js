@@ -432,3 +432,30 @@ export const formatCurrency = (amount) => {
     currency: "SGD",
   })
 }
+
+//Fetching Analytics
+
+export async function fetchAnalyticsData() {
+  const token = localStorage.getItem(ACCESS_TOKEN);
+  try {
+      const response = await fetch('http://127.0.0.1:8000/api/analytics/', {
+          method: 'GET',
+          headers: {
+              'Content-Type': 'application/json',
+              ...(token && { Authorization: `Bearer ${token}` }),
+          },
+      });
+
+      if (!response.ok) {
+          const errorDetails = await response.json();
+          console.error('Failed to fetch analytics data,', errorDetails);
+          throw new Error('Failed to fetch analytics data');
+      }
+
+      const data = await response.json();
+      return data;
+  } catch (error) {
+      console.error('Error fetching analytics data:', error);
+      throw error;
+  }
+}
