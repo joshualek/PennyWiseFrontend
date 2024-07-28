@@ -27,7 +27,8 @@ export async function dashboardLoader() {
     const budgets = await fetchDataDjango("budgets/");
     const expenses = await fetchDataDjango("expenses/");
     const income = await fetchDataDjango("income/")
-    return { userName, budgets, expenses, income };
+    const categories = await fetchDataDjango("category/")
+    return { userName, budgets, expenses, income, categories };
 }
 
 export async function dashboardAction({ request }) {
@@ -48,6 +49,7 @@ export async function dashboardAction({ request }) {
             await createBudget({
                 name: values.newBudget,
                 amount: values.newBudgetAmount,
+            
             })
             return toast.success(`Budget created successfully`)
         } catch (e) {
@@ -61,6 +63,7 @@ export async function dashboardAction({ request }) {
                 name: values.newExpense,
                 amount: values.newExpenseAmount,
                 budget: values.newExpenseBudget,
+                category: values.newExpenseCategory,
             })
             return toast.success(`Expense ${values.newExpense} created successfully`)
         } catch (e) {

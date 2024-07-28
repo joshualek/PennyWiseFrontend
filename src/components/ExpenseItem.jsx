@@ -18,6 +18,16 @@ const deleteExpense = async (expenseId) => {
         console.error(error);
     }
 };
+
+const categories = [
+    { id: 1, name: 'Food', color: '#FF5733' },
+    { id: 2, name: 'Transport', color: '#33FF57' },
+    { id: 3, name: 'Shopping', color: '#3357FF' },
+    { id: 4, name: 'Others', color: '#F333FF' },
+];
+
+const getCategoryById = (id) => categories.find(category => category.id === id);
+
 export const ExpenseItem = ({ expense }) => {
     const fetcher = useFetcher()
     const [budget, setBudget] = useState(null);
@@ -56,6 +66,9 @@ export const ExpenseItem = ({ expense }) => {
         accentColor = "36, 100%, 50%"; // Amber
     }
 
+    // Get category details
+    const categoryDetails = getCategoryById(expense.category);
+
     return (
         <>
             <td>{expense.name}</td>
@@ -65,6 +78,21 @@ export const ExpenseItem = ({ expense }) => {
                 to={`/budget/${budget.id}`}
                 style={{ "--accent": accentColor }}>{budget.name}
             </Link></td>
+            <td>
+                {categoryDetails && (
+                    <span
+                        style={{
+                            backgroundColor: categoryDetails.color,
+                            borderRadius: '12px',
+                            padding: '2px 8px',
+                            color: 'white',
+                            fontSize: '0.8em'
+                        }}
+                    >
+                        {categoryDetails.name}
+                    </span>
+                )}
+            </td>
             <td>
                 <fetcher.Form method="post">
                     <input type="hidden" name="_action" value="deleteExpense" />

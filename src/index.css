@@ -657,6 +657,19 @@ table a {
   font-size: var(--fs-300);
 }
 
+.category-label {
+  margin-top: 4px;
+  padding: 2px 8px;
+  border: 1px solid;
+  border-radius: 12px;
+  font-size: 0.9rem;
+  display: inline-block;
+  color: #fff;
+  background-color: transparent;
+  max-width: fit-content;
+}
+
+
 /* charts */
 .chart {
   height: 400px;
@@ -668,7 +681,6 @@ table a {
   padding: calc(24px / 1.5) calc(24px / 1.2);
 
 }
-
 .statbox:hover {
   /* background-color: #7DB2DD; */
   border: 3px solid #1a6299;

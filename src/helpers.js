@@ -7,6 +7,32 @@ export const fetchData = (key) => {
   return JSON.parse(localStorage.getItem(key));
 };
 
+//Fetching Analytics
+
+export async function fetchAnalyticsData() {
+  const token = localStorage.getItem(ACCESS_TOKEN);
+  try {
+      const response = await fetch('http://127.0.0.1:8000/api/analytics/', {
+          method: 'GET',
+          headers: {
+              'Content-Type': 'application/json',
+              ...(token && { Authorization: `Bearer ${token}` }),
+          },
+      });
+
+      if (!response.ok) {
+          const errorDetails = await response.json();
+          console.error('Failed to fetch analytics data,', errorDetails);
+          throw new Error('Failed to fetch analytics data');
+      }
+
+      const data = await response.json();
+      return data;
+  } catch (error) {
+      console.error('Error fetching analytics data:', error);
+      throw error;
+  }
+}
 
 export async function fetchDataDjango(endpoint, options = {}) {
   const url = `http://127.0.0.1:8000/api/${endpoint}`;
@@ -52,7 +78,7 @@ export const getBudgetsArray = async () => {
   }
 };
 // create budget in Dashboard.jsx
-export async function createBudget({ name, amount }) {
+export async function createBudget({ name, amount}) {
   try {
     const token = localStorage.getItem(ACCESS_TOKEN);
     const response = await fetch("http://127.0.0.1:8000/api/budgets/", {
@@ -62,10 +88,12 @@ export async function createBudget({ name, amount }) {
         ...(token && { Authorization: `Bearer ${token}` }),
         
       },
-      body: JSON.stringify({ name, amount }),
+      body: JSON.stringify({ name, amount}),
     });
     
     if (!response.ok) {
+      const errorDetails = await response.json();
+      console.error('failed to add budget,', errorDetails)
       throw new Error('Failed to create budget');
     }
     
@@ -84,6 +112,7 @@ export const createExpense = async ({ name, amount, budget }) => {
     created_at: Date.now(),
     amount: +amount,
     budget: budget,
+    category: category,
   };
 
   const response = await fetch("http://127.0.0.1:8000/api/expenses/", {
@@ -189,3 +218,4 @@ export const formatCurrency = (amount) => {
     currency: "SGD",
   })
 }
+

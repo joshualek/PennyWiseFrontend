@@ -18,6 +18,8 @@ import BudgetPage, { budgetAction, budgetLoader } from "./pages/BudgetPage";
 import ExpensesPage, { expensesAction, expensesLoader } from "./pages/ExpensesPage";
 import Home, { homeLoader } from "./pages/Home"
 import IncomePage, {incomeAction, incomeLoader } from "./pages/IncomePage";
+import AnalyticsPage, {analyticsLoader} from "./pages/AnalyticsPage";
+import Home, { homeAction, homeLoader } from "./pages/Home"
 import Intro from "./pages/Intro";
 import Error from "./pages/Error";
 import Register from "./pages/Register";
@@ -112,6 +114,12 @@ const router = createBrowserRouter([
         errorElement: <Error />
       },
       {
+        path: "analytics",
+        element: <AnalyticsPage />,
+        loader: analyticsLoader,
+        errorElement: <Error />
+      },
+      {
         path: "student-discounts",
         element: (
           <ProtectedRoute>
@@ -119,7 +127,6 @@ const router = createBrowserRouter([
           </ProtectedRoute>
         ),
         loader: studentDiscountLoader,
-        //action: studentDiscountAction,
         errorElement: <Error />
       },
     ]

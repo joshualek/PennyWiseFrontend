@@ -27,7 +27,7 @@ const Sidebar = ({ isVisible }) => {
                         </Link>
                     </li>
                     <li>
-                        <Link to="/chart">
+                        <Link to="/analytics">
                             <TrendingUpIcon width={24} />
                             <span>Analytics</span>
                         </Link>

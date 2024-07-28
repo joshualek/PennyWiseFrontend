@@ -29,9 +29,14 @@ const deleteBudget = async (budgetId, navigate) => {
     }
 }
 
+
+
+
+
+
 const BudgetItem = ({ budget, showDelete = false, expensesCounter }) => {
-    const { id, name, amount } = budget;
-    const [budgetData, setBudgetData] = useState({ name: '', amount: 0 });
+    const { id, name, amount} = budget;
+    const [budgetData, setBudgetData] = useState({ name: '', amount: 0});
     const [spent, setSpent] = useState(0);
     const navigate = useNavigate();
 
@@ -61,6 +66,8 @@ const BudgetItem = ({ budget, showDelete = false, expensesCounter }) => {
     } else if (percentageSpent >= 0.75) {
         accentColor = "36, 100%, 50%"; // Amber
     }
+
+
 
     return (
         <div className="budget" style={{ "--accent": accentColor }}>
