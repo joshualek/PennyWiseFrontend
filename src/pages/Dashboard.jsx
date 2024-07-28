@@ -1,9 +1,9 @@
-import React, { useState, useEffect, useRef } from "react"
-import { Link, Form, useFetcher, useLoaderData, useNavigate, } from "react-router-dom"
+import React, { useState } from "react"
+import { Link, useLoaderData } from "react-router-dom"
 
 // Library
 import { toast } from "react-toastify"
-import { CurrencyDollarIcon } from '@heroicons/react/24/solid'
+import MenuIcon from '@mui/icons-material/Menu';
 
 // Components
 import Sidebar from "../components/Sidebar"
@@ -18,19 +18,9 @@ import IncomeTable from "../components/IncomeTable"
 
 // Pages
 import Intro from "../pages/Intro"
-import Login from "../pages/Login"
-
-// api
-import api from "../api"
-
-// auth.js
-import { getAccessToken } from "../utils/auth"
 
 // Helper functions
 import { createBudget, createExpense, createIncome, fetchData, fetchDataDjango } from "../helpers"
-
-// Heroicons
-import { Bars3Icon } from '@heroicons/react/24/solid'
 
 export async function dashboardLoader() {
     const userName = await fetchData("userName");
@@ -103,51 +93,25 @@ export async function dashboardAction({ request }) {
 }
 
 const Dashboard = () => {
-    const { userName, budgets, expenses, income, category } = useLoaderData()
-    // useEffect(() => {
-    //     getBudgets();
-    // }, []);
+    const { userName, budgets, expenses, income } = useLoaderData()
+    console.log("Rendering Dashboard with data:", { userName, budgets, expenses, income });
 
-    // const getBudgets = () => {
-    //     api
-    //         .get("/api/budgets/")
-    //         .then((res) => res.data)
-    //         .then((data) => {
-    //             //setBudget(data);
-    //             console.log(data);
-    //         })
-    //         .catch((err) => alert(err));
-    // };
-
-    // const deleteBudget = (id) => {
-    //     api
-    //         .delete(`/api/budgets/delete/${id}/`)
-    //         .then((res) => {
-    //             if (res.status === 204) alert("Budget deleted!");
-    //             else alert("Failed to delete budget.");
-    //             getBudgets(); // after deleting (or not) a note, we want to refresh the notes displayed
-    //         })
-    //         .catch((error) => alert(error));
-    // };
-
-    console.log("Rendering Dashboard with data:", { userName, budgets, expenses, income, category });
-
+    // sidebar
     const [sidebarVisible, setSidebarVisible] = useState(true);
-
     const toggleSidebar = () => {
         setSidebarVisible(!sidebarVisible);
     };
+
     return (
         <>
             {userName ? (
                 <div className="dashboard-container">
                     <Sidebar isVisible={sidebarVisible} />
                     <button className="toggle-sidebar-btn" onClick={toggleSidebar}>
-                        <Bars3Icon />
+                        <MenuIcon />
                     </button>
                     <div className={`dashboard ${sidebarVisible ? '' : 'dashboard-expanded'}`}>
                         <Nav userName={userName} />
-                        <h1>Welcome, <span className="accent">{userName}</span></h1>
                         <div className="grid-sm">
                             {budgets && budgets.length > 0 ? (
                                 <div className="grid-lg">
@@ -158,7 +122,6 @@ const Dashboard = () => {
                                     </div>
                                     <h2>Existing Budgets</h2>
                                     <div className="budgets">
-
                                         {budgets.map((budget) => (
                                             <BudgetItem key={budget.id} budget={budget} />
                                         ))}

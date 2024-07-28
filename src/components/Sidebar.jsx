@@ -3,8 +3,11 @@ import { Link } from "react-router-dom";
 // Styles
 import "../styles/Sidebar.css";
 
-// Heroicons
-import { HomeIcon, ChartBarIcon, StarIcon } from '@heroicons/react/24/solid';
+// Libraries
+import HomeIcon from '@mui/icons-material/Home';
+import TrendingUpIcon from '@mui/icons-material/TrendingUp';
+import SpaceDashboardIcon from '@mui/icons-material/SpaceDashboard';
+import DiscountIcon from '@mui/icons-material/Discount';
 
 const Sidebar = ({ isVisible }) => {
     return (
@@ -18,9 +21,21 @@ const Sidebar = ({ isVisible }) => {
                         </Link>
                     </li>
                     <li>
+                        <Link to="/dashboard">
+                            <SpaceDashboardIcon width={24} />
+                            <span>DashboardHome</span>
+                        </Link>
+                    </li>
+                    <li>
                         <Link to="/analytics">
-                            <ChartBarIcon width={24} />
+                            <TrendingUpIcon width={24} />
                             <span>Analytics</span>
+                        </Link>
+                    </li>
+                    <li>
+                        <Link to="/student-discounts">
+                            <DiscountIcon width={24} />
+                            <span>DiscountsAnalytics</span>
                         </Link>
                     </li>
                     <li>

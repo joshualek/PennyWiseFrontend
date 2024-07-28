@@ -1,48 +1,10 @@
-import { useState, useEffect, useRef } from 'react'
+import { useEffect, useRef } from 'react'
 import { useFetcher } from 'react-router-dom'
 
 // library
 import { CurrencyDollarIcon } from '@heroicons/react/24/solid'
 
 const AddBudgetForm = () => {
-    // const [budget, setBudget] = useState([]);
-    // const [amount, setAmount] = useState("");
-    // const [title, setTitle] = useState("");
-
-    // const getBudgets = () => {
-    //     api
-    //         .get("/api/budgets/")
-    //         .then((res) => res.data)
-    //         .then((data) => {
-    //             setBudget(data);
-    //             console.log(data);
-    //         })
-    //         .catch((err) => alert(err));
-    // };
-
-    // const deleteBudget = (id) => {
-    //     api
-    //         .delete(`/api/budgets/delete/${id}/`)
-    //         .then((res) => {
-    //             if (res.status === 204) alert("Budget deleted!");
-    //             else alert("Failed to delete budget.");
-    //             getBudgets(); // after deleting (or not) a note, we want to refresh the notes displayed
-    //         })
-    //         .catch((error) => alert(error));
-    // };
-
-    // const createBudget = (e) => {
-    //     e.preventDefault();
-    //     api
-    //         .post("/api/budgets/", { content, title })
-    //         .then((res) => {
-    //             if (res.status === 201) alert("Budget created!");
-    //             else alert("Failed to make budget.");
-    //             getBudgets();
-    //         })
-    //         .catch((err) => alert(err));
-    // };
-
     const fetcher = useFetcher()
     const isSubmitting = fetcher.state === "submitting"
     const formRef = useRef()

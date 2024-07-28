@@ -106,8 +106,6 @@ export const mockBarData = [
     }
   ]
 
-
-
 export const mockStatData = {
     spending_by_category: [
         { category__name: 'Food', total_spent: 150, created_at: '2024-01-15' },

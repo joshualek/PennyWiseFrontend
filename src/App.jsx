@@ -16,6 +16,7 @@ import ProtectedRoute from "./components/ProtectedRoute";
 import Dashboard, { dashboardAction, dashboardLoader } from "./pages/Dashboard";
 import BudgetPage, { budgetAction, budgetLoader } from "./pages/BudgetPage";
 import ExpensesPage, { expensesAction, expensesLoader } from "./pages/ExpensesPage";
+import Home, { homeLoader } from "./pages/Home"
 import IncomePage, {incomeAction, incomeLoader } from "./pages/IncomePage";
 import AnalyticsPage, {analyticsLoader} from "./pages/AnalyticsPage";
 import Home, { homeAction, homeLoader } from "./pages/Home"
@@ -24,6 +25,7 @@ import Intro from "./pages/Intro";
 import Error from "./pages/Error";
 import Register from "./pages/Register";
 import Login from "./pages/Login";
+import StudentDiscount, { studentDiscountLoader } from "./pages/StudentDiscount";
 
 const router = createBrowserRouter([
   {
@@ -50,13 +52,12 @@ const router = createBrowserRouter([
       },
       {
         path: "home",
-        element: ( <Home />
-          // <ProtectedRoute>
-          //   <Home />
-          // </ProtectedRoute>
+        element: (
+          <ProtectedRoute>
+            <Home />
+          </ProtectedRoute>
         ),
         loader: homeLoader,
-        action: homeAction,
         errorElement: <Error />
       },
       {
@@ -72,7 +73,11 @@ const router = createBrowserRouter([
       },
       {
         path: "budget/:id",
-        element: <BudgetPage />,
+        element: (
+          <ProtectedRoute>
+            <BudgetPage />
+          </ProtectedRoute>
+        ),
         loader: budgetLoader,
         action: budgetAction,
         errorElement: <Error />,
@@ -88,7 +93,11 @@ const router = createBrowserRouter([
       },
       {
         path: "expenses",
-        element: <ExpensesPage />,
+        element: (
+          <ProtectedRoute>
+            <ExpensesPage />
+          </ProtectedRoute>
+        ),
         loader: expensesLoader,
         action: expensesAction,
         errorElement: <Error />
@@ -96,12 +105,15 @@ const router = createBrowserRouter([
 
       {
         path: "income",
-        element: <IncomePage />,
+        element: (
+          <ProtectedRoute>
+            <IncomePage />
+          </ProtectedRoute>
+        ),
         loader: incomeLoader,
         action: incomeAction,
         errorElement: <Error />
       },
-
       {
         path: "analytics",
         element: <AnalyticsPage />,
@@ -114,6 +126,16 @@ const router = createBrowserRouter([
         element: <GoalPage />,
         loader: goalLoader,
         action: goalAction,
+        errorElement: <Error />
+      },
+      {
+        path: "student-discounts",
+        element: (
+          <ProtectedRoute>
+            <StudentDiscount />
+          </ProtectedRoute>
+        ),
+        loader: studentDiscountLoader,
         errorElement: <Error />
       },
     ]
