@@ -1,0 +1,82 @@
+.goal-item {
+    background: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    padding: 16px;
+    margin-bottom: 16px;
+    transition: background 0.3s;
+}
+
+.goal-item:hover {
+    background: #e9e9e9;
+}
+
+.goal-item__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 16px;
+}
+
+.goal-item__progress {
+    margin-bottom: 16px;
+}
+
+.goal-item__progress progress {
+    width: 100%;
+    height: 24px;
+    border-radius: 12px;
+    overflow: hidden;
+    -webkit-appearance: none;
+    appearance: none;
+}
+
+.goal-item__progress progress::-webkit-progress-bar {
+    background-color: #f3f3f3;
+}
+
+.goal-item__progress progress::-webkit-progress-value {
+    background-color: #4caf50;
+    transition: width 0.3s;
+}
+
+.goal-item__progress-text {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 8px;
+}
+
+.goal-item__form {
+    display: flex;
+    flex-direction: column;
+}
+
+.goal-item__form label {
+    margin-bottom: 8px;
+}
+
+.goal-item__form input {
+    padding: 8px;
+    margin-bottom: 8px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+.goal-item__form .btn {
+    align-self: flex-start;
+}
+
+.btn--dark {
+    background-color: #333;
+    color: #fff;
+}
+
+.btn--danger {
+    background-color: #e53935;
+    color: #fff;
+}
+
+.btn--success {
+    background-color: #4caf50;
+    color: #fff;
+}

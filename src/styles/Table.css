@@ -4,7 +4,7 @@
     flex-direction: column;
     margin: 0 auto;
     padding: 20px;
-    width: calc(100vw - 100px); /* Slightly less than the viewport width */
+    width: 100%; /* Slightly less than the viewport width */
     box-sizing: border-box; /* Include padding in the width calculation */
 }
 

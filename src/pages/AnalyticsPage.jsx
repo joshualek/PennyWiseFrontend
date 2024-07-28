@@ -31,17 +31,22 @@ export async function analyticsLoader() {
 }
 
 const AnalyticsPage = () => {
-    const { userName, analyticsData } = useLoaderData();
+    const { userName, analyticsData: initialAnalyticsData } = useLoaderData();
     const [sidebarVisible, setSidebarVisible] = useState(true);
     const [selectedMonth, setSelectedMonth] = useState(new Date().toLocaleString('default', { month: 'long' }));
+    const [analyticsData, setAnalyticsData] = useState(initialAnalyticsData);
     const theme = useTheme();
 
     const toggleSidebar = () => {
         setSidebarVisible(!sidebarVisible);
     };
 
-    const handleMonthChange = (event) => {
-        setSelectedMonth(event.target.value);
+    const handleMonthChange = async (event) => {
+        const newMonth = event.target.value;
+        setSelectedMonth(newMonth);
+        // Fetch the analytics data for the new selected month
+        const newAnalyticsData = await fetchDataDjango(`analytics/?month=${newMonth}`);
+        setAnalyticsData(newAnalyticsData);
     };
 
     // Format the data for the line chart

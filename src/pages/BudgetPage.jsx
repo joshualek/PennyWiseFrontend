@@ -82,6 +82,7 @@ const BudgetPage = () => {
 
         fetchSpentAmount();
     }, [id]);
+    
     const percentageSpent = spent / amount
 
     let accentColor = "206, 71%, 35%"; // Default color in HSL format

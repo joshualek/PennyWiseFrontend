@@ -67,7 +67,13 @@ export async function dashboardAction({ request }) {
             })
             return toast.success(`Expense ${values.newExpense} created successfully`)
         } catch (e) {
-            throw new Error("There was a problem creating your expense.")
+            console.error("Error creating expense:", e);
+            if (e.response) {
+                // If there is a response object, log its details
+                console.error("Response status:", e.response.status);
+                console.error("Response data:", e.response.data);
+            }
+            throw new Error("There was a problem creating your expense.");
         }
     }
     

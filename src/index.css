@@ -368,10 +368,16 @@ select {
   justify-content: flex-start; /* Align items to the left */
 }
 .forms-container > :first-child {
-  margin-right: 20px; /* Adjust the 20px to the desired gap */
+  margin-right: 10px; /* Adjust the 20px to the desired gap */
 }
 .forms-container > :nth-child(2) {
-  margin-left: 20px; /* Adjust the 20px to the desired gap */
+  margin-left: 10px;
+  margin-right: 10px;  /* Adjust the 20px to the desired gap */
+}
+
+.forms-container > :nth-child(3) {
+  margin-left: 10px; 
+  margin-right: 10px; 
 }
 
 /* Intro */
