@@ -19,7 +19,12 @@ import { Bars3Icon } from '@heroicons/react/24/solid'
 export async function expensesLoader() {
     const userName = await fetchData("userName")
     const expenses = await fetchDataDjango("expenses/")
-    return { userName, expenses }
+    const categories = await fetchDataDjango("category/"); 
+
+    console.log('Categories:', categories);  // Debug: log categories to verify
+
+    return { userName, expenses, categories };
+
 }
 
 // Action
@@ -33,14 +38,18 @@ export async function expensesAction({request}) {
 }
 
 const ExpensesPage = () => {
-    const { userName, expenses } = useLoaderData()
-    console.log("Rendering ExpensesPage with data:", { userName, expenses });
+    const { userName, expenses, categories } = useLoaderData()
+    console.log("Rendering ExpensesPage with data:", { userName, expenses, categories });
 
     // Sidebar
     const [sidebarVisible, setSidebarVisible] = useState(true);
+    const [filterCategory, setFilterCategory] = useState("");
+    const [sortOrder, setSortOrder] = useState("asc");
+
     const toggleSidebar = () => {
         setSidebarVisible(!sidebarVisible);
     };
+
 
     return (
         <div className="dashboard-container">
@@ -56,7 +65,7 @@ const ExpensesPage = () => {
                         expenses && expenses.length > 0 ? (
                             <div className="grid-md">
                                 <h2>Recent Expenses <small>({expenses.length} total)</small></h2>
-                                <Table expenses={expenses} />
+                                <Table expenses={expenses} categories={categories} />
                             </div>
                         ) : <p>No expenses found</p>
                         }
