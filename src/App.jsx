@@ -19,6 +19,7 @@ import ExpensesPage, { expensesAction, expensesLoader } from "./pages/ExpensesPa
 import IncomePage, {incomeAction, incomeLoader } from "./pages/IncomePage";
 import AnalyticsPage, {analyticsLoader} from "./pages/AnalyticsPage";
 import Home, { homeAction, homeLoader } from "./pages/Home"
+import GoalPage, {goalAction, goalLoader } from "./pages/GoalPage";
 import Intro from "./pages/Intro";
 import Error from "./pages/Error";
 import Register from "./pages/Register";
@@ -105,6 +106,14 @@ const router = createBrowserRouter([
         path: "analytics",
         element: <AnalyticsPage />,
         loader: analyticsLoader,
+        errorElement: <Error />
+      },
+
+      {
+        path: "goals",
+        element: <GoalPage />,
+        loader: goalLoader,
+        action: goalAction,
         errorElement: <Error />
       },
     ]

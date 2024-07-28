@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import "../styles/Sidebar.css";
 
 // Heroicons
-import { HomeIcon, ChartBarIcon } from '@heroicons/react/24/solid';
+import { HomeIcon, ChartBarIcon, StarIcon } from '@heroicons/react/24/solid';
 
 const Sidebar = ({ isVisible }) => {
     return (
@@ -14,13 +14,19 @@ const Sidebar = ({ isVisible }) => {
                     <li>
                         <Link to="/home" className="menu-link">
                             <HomeIcon width={24} />
-                            <span></span>
+                            <span>Home</span>
                         </Link>
                     </li>
                     <li>
                         <Link to="/analytics">
                             <ChartBarIcon width={24} />
-                            <span></span>
+                            <span>Analytics</span>
+                        </Link>
+                    </li>
+                    <li>
+                        <Link to="/goals">
+                            <StarIcon width={24} />
+                            <span>Goals</span>
                         </Link>
                     </li>
                 </ul>

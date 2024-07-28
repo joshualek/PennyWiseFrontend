@@ -459,3 +459,59 @@ export async function fetchAnalyticsData() {
       throw error;
   }
 }
+
+
+export const getSavingsGoalsArray = async () => {
+  try {
+      const savingsGoals = await fetchDataDjango("goals/");
+      return savingsGoals;
+  } catch (error) {
+      console.error('Error fetching savings goals:', error);
+  }
+};
+
+export async function createGoal({ name, target_amount }) {
+  try {
+      const token = localStorage.getItem(ACCESS_TOKEN);
+      const response = await fetch("http://127.0.0.1:8000/api/goals/", {
+          method: 'POST',
+          headers: {
+              'Content-Type': 'application/json',
+              ...(token && { Authorization: `Bearer ${token}` }),
+          },
+          body: JSON.stringify({ name, target_amount }),
+      });
+
+      if (!response.ok) {
+          const errorDetails = await response.json();
+          console.error('failed to add savings goal,', errorDetails);
+          throw new Error('Failed to create savings goal');
+      }
+
+      const data = await response.json();
+      return data; // Return the created savings goal or relevant data
+  } catch (error) {
+      console.error('Error creating savings goal:', error);
+      throw error; // Rethrow the error to be handled by the caller
+  }
+}
+
+export async function updateGoalProgress(goalId, amount) {
+  const token = localStorage.getItem(ACCESS_TOKEN);
+  const response = await fetch(`http://127.0.0.1:8000/api/goals/${goalId}/`, {
+    method: 'PATCH',
+    headers: {
+      'Content-Type': 'application/json',
+      ...(token && { Authorization: `Bearer ${token}` }),
+    },
+    body: JSON.stringify({ current_amount: amount }),
+  });
+
+  if (!response.ok) {
+    const errorDetails = await response.json();
+    console.error('Failed to update goal progress:', errorDetails);
+    throw new Error('Failed to update goal progress');
+  }
+
+  return response.json();
+}
