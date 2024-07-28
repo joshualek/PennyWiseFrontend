@@ -285,10 +285,9 @@ p {
 }
 
 main {
-  max-width: 1500px;
-  width: 100%;
+  width: calc(100% - 150px);
   min-height: 100vh;
-  /* padding: var(--space-md) var(--space-md) var(--space-xl); */
+  /* padding: 0 10px 0 10px; */
   margin-inline: auto;
   display: -ms-grid;
   display: grid;
@@ -307,8 +306,6 @@ nav {
   -ms-flex-align: center;
   align-items: center;
   width: 100%;
-  /* padding: var(--space-md);*/
-  max-width: 1500px;
   margin-inline: auto;
 }
 
@@ -415,20 +412,23 @@ select {
 
 /* dashboard */
 .dashboard {
-  margin-left: 60px; /* Adjust according to the width of the sidebar */
+  margin: 0 90px 0 90px;
   padding: 1rem;
-  width: 100%; /* Adjust according to the width of the sidebar */
+  width: 100%; 
   box-sizing: border-box;
   display: -ms-grid;
   display: grid;
   gap: var(--space-lg);
   place-items: start;
   transition: margin-left 0.3s, width 0.3s;
+  transition: margin-right 0.3s, width 0.3s;
+
 }
 
 .dashboard-expanded {
-  margin-left: 40px;
+  margin: 0 0 0 0;
   width: 100%;
+
 }
 
 .dashboard-container {
@@ -668,8 +668,14 @@ table a {
   padding: calc(24px / 1.5) calc(24px / 1.2);
 
 }
+
 .statbox:hover {
   /* background-color: #7DB2DD; */
   border: 3px solid #1a6299;
   box-shadow: 0.1em 0.1em 1em #1a6299; 
+}
+
+.statbox-area {
+  /* padding: 0 calc(10%) 0 calc(10%); */
+  padding: 0;
 }
