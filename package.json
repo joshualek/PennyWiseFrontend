@@ -10,20 +10,11 @@
     "preview": "vite preview"
   },
   "dependencies": {
-<<<<<<< HEAD
-    "@emotion/react": "^11.11.4",
-    "@emotion/styled": "^11.11.5",
-    "@heroicons/react": "^2.1.4",
-    "@mui/icons-material": "^5.16.4",
-    "@mui/material": "^5.16.4",
-    "@mui/x-data-grid": "^7.10.0",
-=======
     "@emotion/react": "^11.13.0",
     "@emotion/styled": "^11.13.0",
     "@heroicons/react": "^2.1.4",
     "@mui/icons-material": "^5.16.4",
     "@mui/material": "^5.16.4",
->>>>>>> goi-analytics
     "@nivo/bar": "^0.87.0",
     "@nivo/core": "^0.87.0",
     "@nivo/line": "^0.87.0",

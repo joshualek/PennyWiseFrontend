@@ -8,6 +8,7 @@ import HomeIcon from '@mui/icons-material/Home';
 import TrendingUpIcon from '@mui/icons-material/TrendingUp';
 import SpaceDashboardIcon from '@mui/icons-material/SpaceDashboard';
 import DiscountIcon from '@mui/icons-material/Discount';
+import StarIcon from '@mui/icons-material/Star';
 
 const Sidebar = ({ isVisible }) => {
     return (
@@ -23,7 +24,7 @@ const Sidebar = ({ isVisible }) => {
                     <li>
                         <Link to="/dashboard">
                             <SpaceDashboardIcon width={24} />
-                            <span>DashboardHome</span>
+                            <span>Dashboard</span>
                         </Link>
                     </li>
                     <li>
@@ -35,7 +36,7 @@ const Sidebar = ({ isVisible }) => {
                     <li>
                         <Link to="/student-discounts">
                             <DiscountIcon width={24} />
-                            <span>DiscountsAnalytics</span>
+                            <span>Discounts</span>
                         </Link>
                     </li>
                     <li>
