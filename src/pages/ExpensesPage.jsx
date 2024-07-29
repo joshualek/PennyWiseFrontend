@@ -60,11 +60,10 @@ const ExpensesPage = () => {
                     <Bars3Icon />
                 </button>
                 <div className="grid-lg">
-                    <h1>All Expenses</h1>
+                    <h1>All Expenses<small>({expenses.length} total)</small></h1>
                     {
                         expenses && expenses.length > 0 ? (
                             <div className="grid-md">
-                                <h2>Recent Expenses <small>({expenses.length} total)</small></h2>
                                 <Table expenses={expenses} categories={categories} />
                             </div>
                         ) : <p>No expenses found</p>

@@ -51,11 +51,10 @@ const IncomePage = () => {
                     <Bars3Icon />
                 </button>
                 <div className="grid-lg">
-                    <h1>All Income</h1>
+                    <h1>All Income<small>({income.length} total)</small></h1>
                     {
                         income && income.length > 0 ? (
                             <div className="grid-md">
-                                <h2>Recent Income <small>({income.length} total)</small></h2>
                                 <IncomeTable income={income} />
                             </div>
                         ) : <p>No recent income</p>

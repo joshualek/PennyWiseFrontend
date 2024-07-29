@@ -154,8 +154,8 @@ const Home = () => {
                                                     <Legend />
                                                 </PieChart>
                                             </ResponsiveContainer>
-                                            <p>Income: ${totalIncome}</p> {/* Display income */}
-                                            <p>Expenses: ${totalExpenses}</p> {/* Display expenses */}
+                                            <small>Income: ${totalIncome} | </small> {/* Display income */}
+                                            <small>Expenses: ${totalExpenses}</small> {/* Display expenses */}
                                         </div>
                                         <div style={{ flex: 1 }}>
                                             <h3 style={{ marginBottom: '20px' }}>Spending by Category</h3>
@@ -209,4 +209,4 @@ const Home = () => {
     );
 }
 
-export default Home;
+export default Home; 
