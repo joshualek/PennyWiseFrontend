@@ -134,10 +134,11 @@ const GoalItem = ({ goal, updateGoals }) => {
 const styles = {
     goalItem: {
         border: '1px solid #ccc',
-        borderRadius: '8px',
+        borderRadius: '25px',
         padding: '16px',
         margin: '8px 0',
-        backgroundColor: '#f9f9f9',
+        backgroundColor: `var(--bkg)`,
+        width: `calc(100% / 4.5)` ,
     },
     progressText: {
         display: 'flex',

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link, useLoaderData } from "react-router-dom";
 import { Bars3Icon } from '@heroicons/react/24/solid';
 import { Box } from "@mui/material";
@@ -12,9 +12,12 @@ import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContaine
 import Sidebar from "../components/Sidebar";
 import Nav from "../components/Nav";
 import StatBox from "../components/StatBox";
+import StudentDiscountCard from "../components/StudentDiscountCard"
 
 // Pages
 import Intro from "../pages/Intro";
+import { studentDiscountLoader } from './StudentDiscount';
+
 
 // Helper functions
 import { fetchData, fetchDataDjango } from "../helpers";
@@ -30,7 +33,7 @@ export async function homeLoader() {
 
 const Home = () => {
     const { userName, budgets, expenses, income, categories } = useLoaderData();
-
+    
     // sidebar
     const [sidebarVisible, setSidebarVisible] = useState(true);
     const toggleSidebar = () => {
@@ -56,6 +59,16 @@ const Home = () => {
             .filter(expense => expense.category === category.id)
             .reduce((sum, expense) => sum + Number(expense.amount), 0)
     }));
+        
+    // Student Discount
+    const [discounts, setDiscounts] = useState([]);
+    useEffect(() => {
+        async function fetchData() {
+            const { studentDiscount } = await studentDiscountLoader();
+            setDiscounts(studentDiscount.slice(0, 6)); // Get the most recent 6 discounts
+        }
+        fetchData();
+    }, []);
 
     return (
         <>
@@ -86,22 +99,22 @@ const Home = () => {
                                         className="statbox-area"
                                     >
                                         <StatBox
-                                            title="Total Expenses"
-                                            subtitle={`$${totalExpenses}`}
-                                            link="/expenses"
-                                            icon={
-                                                <CreditCardIcon
-                                                    sx={{ color: "#7DB2DD", fontSize: "40px" }}
-                                                />
-                                            }
-                                        />
-                                        <StatBox
                                             title="Total Income"
                                             subtitle={`$${totalIncome}`}
                                             link="/income"
                                             icon={
                                                 <MonetizationOnIcon
-                                                    sx={{ color: "#7DB2DD", fontSize: "40px" }}
+                                                    sx={{ color: "#7DBDDD", fontSize: "40px" }}
+                                                />
+                                            }
+                                        />
+                                        <StatBox
+                                            title="Total Expenses"
+                                            subtitle={`$${totalExpenses}`}
+                                            link="/expenses"
+                                            icon={
+                                                <CreditCardIcon
+                                                    sx={{ color: "#7DBDDD", fontSize: "40px" }}
                                                 />
                                             }
                                         />
@@ -111,14 +124,14 @@ const Home = () => {
                                             link="/dashboard"
                                             icon={
                                                 <RequestQuoteIcon
-                                                    sx={{ color: "#7DB2DD", fontSize: "40px" }}
+                                                    sx={{ color: "#7DBDDD", fontSize: "40px" }}
                                                 />
                                             }
                                         />
                                         <StatBox
                                             title="% of Budget Spent"
                                             subtitle={`${percentageSpent}%`}
-                                            progress={`${percentageSpent/100}`}
+                                            progress={`${percentageSpent / 100}`}
                                             link="/dashboard"
                                         />
                                     </Box>
@@ -134,7 +147,7 @@ const Home = () => {
                                                         outerRadius={150}
                                                     >
                                                         {incomeExpensesData.map((entry, index) => (
-                                                            <Cell key={`cell-${index}`} fill={index === 0 ? "#7DB2DD" : "#FF5733"} />
+                                                            <Cell key={`cell-${index}`} fill={index === 0 ? "#1a6299" : "#7DBDDD"} />
                                                         ))}
                                                     </Pie>
                                                     <Tooltip formatter={(value, name) => [`$${value}`, name]} />
@@ -152,18 +165,31 @@ const Home = () => {
                                                     <XAxis dataKey="name" />
                                                     <YAxis />
                                                     <Tooltip />
-                                                    <Bar dataKey="value" fill="#7DB2DD" />
+                                                    <Bar dataKey="value" fill="#1a6299" />
                                                 </BarChart>
                                             </ResponsiveContainer>
                                         </div>
                                     </div>
-                                    <div style={{ marginTop: '40px', display: 'flex', justifyContent: 'space-between' }}>
+                                    <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: 40}}>
                                         <Link to="/analytics">
                                             <button className="btn btn--primary">Go to Analytics</button>
                                         </Link>
                                         <Link to="/dashboard">
                                             <button className="btn btn--secondary">Expand Dashboard</button>
                                         </Link>
+                                    </div>
+                                    <h3>Student Discounts Overview</h3>
+                                    <div className="flex-md">
+                                        {discounts.map((discount, index) => (
+                                            <StudentDiscountCard
+                                                key={index}
+                                                date={discount.date}
+                                                channel_id={discount.channel_id}
+                                                message={discount.message}
+                                                channel_link={discount.channel_link}
+                                                discount_link={discount.discount_link}
+                                            />
+                                        ))}
                                     </div>
                                 </div>
                             ) : (

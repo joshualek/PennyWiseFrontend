@@ -203,6 +203,17 @@ p {
 
 /* utility layouts */
 
+.flex-spread {
+  display: flex;
+  /* justify-content: space-between; */
+  align-items: start;
+  flex-wrap: wrap;
+  gap: var(--space-md);
+}
+.flex-spread.center-last-row {
+  justify-content: center;
+}
+
 .flex-lg {
   display: -webkit-box;
   display: -ms-flexbox;

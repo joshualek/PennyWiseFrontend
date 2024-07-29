@@ -127,7 +127,7 @@ const GoalPage = () => {
                             Goals Overview
                         </h1>
                         <AddGoalsForm updateGoals={updateGoals} />
-                        <div className="grid-md">
+                        <div className="flex-spread">
                             {goalsList && goalsList.length > 0 ? (
                                 goalsList.map((goal) => (
                                     <GoalItem key={goal.id} goal={goal} updateGoals={updateGoals} />

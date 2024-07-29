@@ -6,8 +6,6 @@ import { ResponsiveBar } from '@nivo/bar';
 import { ResponsivePie } from '@nivo/pie';
 import { ResponsiveLine } from '@nivo/line';
 import { Container, Typography, Box, Grid, Card, CardContent, Select, MenuItem, FormControl, InputLabel, useTheme } from '@mui/material';
-import styled from 'styled-components';
-import { tokens } from "../theme";
 
 // Components
 import Sidebar from "../components/Sidebar";
@@ -144,7 +142,7 @@ const AnalyticsPage = () => {
                                     legendPosition: 'middle',
                                     legendOffset: -40,
                                 }}
-                                colors={{ scheme: 'nivo' }}
+                                colors={{ scheme: 'blues' }}
                                 pointSize={10}
                                 pointColor={{ theme: 'background' }}
                                 pointBorderWidth={2}
@@ -202,17 +200,8 @@ const AnalyticsPage = () => {
                                 padding={0.3}
                                 valueScale={{ type: 'linear' }}
                                 indexScale={{ type: 'band', round: true }}
-                                colors={{ scheme: 'nivo' }}
+                                colors={ "#7dbddd" }
                                 defs={[
-                                    {
-                                        id: 'dots',
-                                        type: 'patternDots',
-                                        background: 'inherit',
-                                        color: '#38bcb2',
-                                        size: 4,
-                                        padding: 1,
-                                        stagger: true,
-                                    },
                                     {
                                         id: 'lines',
                                         type: 'patternLines',
@@ -295,9 +284,9 @@ const AnalyticsPage = () => {
                                 innerRadius={0.5}
                                 padAngle={0.7}
                                 cornerRadius={3}
-                                colors={{ scheme: 'nivo' }}
+                                colors={{ scheme: 'blues',  modifiers: [['darker', 1]] }}
                                 borderWidth={1}
-                                borderColor={{ from: 'color', modifiers: [['darker', 0.2]] }}
+                                borderColor={{ from: 'color', modifiers: [['darker', 0.6]] }}
                                 radialLabelsSkipAngle={10}
                                 radialLabelsTextColor="#333333"
                                 radialLabelsLinkColor={{ from: 'color' }}
