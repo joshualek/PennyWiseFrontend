@@ -6,6 +6,7 @@ import { ResponsiveBar } from '@nivo/bar';
 import { ResponsivePie } from '@nivo/pie';
 import { ResponsiveLine } from '@nivo/line';
 import { Container, Typography, Box, Grid, Card, CardContent, Select, MenuItem, FormControl, InputLabel, useTheme } from '@mui/material';
+import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
 
 // Components
 import Sidebar from "../components/Sidebar";
@@ -50,21 +51,26 @@ const AnalyticsPage = () => {
     // Format the data for the line chart
     const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
     
-    const spendingPerMonthData = {
-        id: "Total Spending",
-        data: analyticsData.spending_per_month.map(item => ({
-            x: months[item.month - 1],
-            y: item.total_spent,
-        })),
-    };
+    const spendingPerMonthData = analyticsData.spending_per_month.map(item => ({
+        month: months[item.month - 1],
+        total_spent: item.total_spent,
+    }));
 
-    const netIncomePerMonthData = {
-        id: "Net Income",
-        data: analyticsData.net_income_per_month.map(item => ({
-            x: months[item.month - 1],
-            y: item.net_income,
-        })),
-    };
+    const netIncomePerMonthData = analyticsData.net_income_per_month.map(item => ({
+        month: months[item.month - 1],
+        net_income: item.net_income,
+    }));
+
+    // Merge the data for the line chart
+    const lineChartData = months.map((month, index) => {
+        const spendingData = spendingPerMonthData.find(data => data.month === month) || {};
+        const incomeData = netIncomePerMonthData.find(data => data.month === month) || {};
+        return {
+            month,
+            total_spent: spendingData.total_spent || 0,
+            net_income: incomeData.net_income || 0
+        };
+    });
 
     // Weekly Expenses Data
     const weeklyExpensesData = analyticsData.weekly_expenses.map((item) => ({
@@ -124,67 +130,53 @@ const AnalyticsPage = () => {
                             Monthly Spending and Net Income
                         </Typography>
                         <div style={{ height: 400 }}>
-                        <ResponsiveLine
-                                data={[spendingPerMonthData, netIncomePerMonthData]}
-                                margin={{ top: 50, right: 150, bottom: 50, left: 60 }}
-                                xScale={{ type: 'point' }}
-                                yScale={{ type: 'linear', stacked: false, min: 'auto', max: 'auto' }}
-                                axisTop={null}
-                                axisRight={null}
-                                axisBottom={{
-                                    orient: 'bottom',
-                                    legendPosition: 'middle',
-                                    legendOffset: 32,
-                                    tickValues: months.filter((_, index) => spendingPerMonthData.data.some(data => data.x === months[index])),
-                                }}
-                                axisLeft={{
-                                    orient: 'left',
-                                    legendPosition: 'middle',
-                                    legendOffset: -40,
-                                }}
-                                colors={{ scheme: 'blues' }}
-                                pointSize={10}
-                                pointColor={{ theme: 'background' }}
-                                pointBorderWidth={2}
-                                pointBorderColor={{ from: 'serieColor' }}
-                                pointLabelYOffset={-12}
-                                useMesh={true}
-                                legends={[
-                                    {
-                                        anchor: 'bottom-right',
-                                        direction: 'column',
-                                        justify: false,
-                                        translateX: 100,
-                                        translateY: 0,
-                                        itemsSpacing: 0,
-                                        itemDirection: 'left-to-right',
-                                        itemWidth: 80,
-                                        itemHeight: 20,
-                                        itemOpacity: 0.75,
-                                        symbolSize: 12,
-                                        symbolShape: 'circle',
-                                        symbolBorderColor: 'rgba(0, 0, 0, .5)',
-                                        effects: [
-                                            {
-                                                on: 'hover',
-                                                style: {
-                                                    itemBackground: 'rgba(0, 0, 0, .03)',
-                                                    itemOpacity: 1,
-                                                },
-                                            },
-                                        ],
-                                    },
-                                ]}
-                                tooltip={({ point }) => (
-                                    <div style={{ background: 'black', padding: '5px', border: '1px solid #ccc' }}>
-                                        <strong>{point.serieId}</strong>
-                                        <br />
-                                        Month: {point.data.xFormatted}
-                                        <br />
-                                        Amount: ${point.data.yFormatted}
-                                    </div>
-                                )}
-                            />
+                            <ResponsiveContainer>
+                                <LineChart 
+                                    data={lineChartData} 
+                                    margin={{ top: 20, right: 30, bottom: 70, left: 20 }}  // Adjust the bottom margin here
+                                >
+                                    <CartesianGrid strokeDasharray="3 3" />
+                                    <XAxis 
+                                        dataKey="month" 
+                                        tick={{ fontSize: 12 }}  // Adjust the font size of the tick labels
+                                        angle={-45}              // Rotate the tick labels if needed
+                                        textAnchor="end"         // Align the rotated labels
+                                    />
+                                    <YAxis 
+                                        tick={{ fontSize: 12 }}  // Adjust the font size of the tick labels
+                                    />
+                                    <Tooltip 
+                                        formatter={(value, name) => {
+                                            const formattedValue = `$${value.toFixed(2)}`;
+                                            if (name === 'total_spent') {
+                                                return ['Total Spent', formattedValue];
+                                            } else if (name === 'net_income') {
+                                                return ['Net Income', formattedValue];
+                                            }
+                                            return [name, formattedValue];
+                                        }}
+                                        contentStyle={{ fontSize: '12px' }}  // Adjust the font size of the tooltip text
+                                    />
+                                    <Legend 
+                                        formatter={(value) => {
+                                            switch (value) {
+                                                case 'total_spent':
+                                                    return 'Total Spent';
+                                                case 'net_income':
+                                                    return 'Net Income';
+                                                default:
+                                                    return value;
+                                            }
+                                        }}
+                                        wrapperStyle={{ fontSize: 12 }}  // Smaller font size for legend
+                                        layout="vertical"  // Vertical layout
+                                        align="right"  // Align to the right
+                                        verticalAlign="top"  // Align to the top
+                                    />
+                                    <Line type="monotone" dataKey="total_spent" stroke="#7dbddd" strokeWidth={3} activeDot={{ r: 8 }} />  {/* Thicker blue color for Total Spent */}
+                                    <Line type="monotone" dataKey="net_income" stroke="#1e90ff" strokeWidth={3} />  {/* Contrasting blue color for Net Income */}
+                                </LineChart>
+                            </ResponsiveContainer>
                         </div>
                     </Box>
                     <Box my={4}>
