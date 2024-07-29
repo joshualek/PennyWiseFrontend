@@ -234,8 +234,8 @@ export async function createGoal({ name, target_amount }) {
 
       if (!response.ok) {
           const errorDetails = await response.json();
-          console.error('failed to add savings goal,', errorDetails);
-          throw new Error('Failed to create savings goal');
+          console.error('failed to create goal,', errorDetails);
+          throw new Error('Failed to create goal');
       }
 
       const data = await response.json();
@@ -267,11 +267,11 @@ export async function updateGoalProgress(goalId, amount) {
 }
 
 
-export const getSavingsGoalsArray = async () => {
+export const getGoalsArray = async () => {
   try {
-      const savingsGoals = await fetchDataDjango("goals/");
-      return savingsGoals;
+      const goals = await fetchDataDjango("goals/");
+      return goals;
   } catch (error) {
-      console.error('Error fetching savings goals:', error);
+      console.error('Error fetching goals:', error);
   }
 };

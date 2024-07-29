@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { Link, useLoaderData, useFetcher } from "react-router-dom";
 
+// Library
+import { toast } from "react-toastify"
+
 // Components
 import AddGoalsForm from "../components/AddGoalsForm";
 import GoalItem from "../components/GoalItem";
@@ -9,7 +12,7 @@ import Nav from "../components/Nav";
 import MenuIcon from '@mui/icons-material/Menu';
 
 // Helpers
-import { fetchData, fetchDataDjango } from "../helpers";
+import { fetchData, fetchDataDjango, createGoal } from "../helpers";
 
 // Loader function to tell react router dom how to load the data (in this case GoalPage)
 export async function goalLoader() {
@@ -25,19 +28,14 @@ export async function goalAction({ request }) {
 
     if (_action === "createGoal") {
         try {
-            await fetchDataDjango("goals/", {
-                method: "POST",
-                body: JSON.stringify(values),
-            });
-            return { success: true };
+            await createGoal({
+                name: values.goalName,
+                target_amount: values.targetAmount,
+            
+            })
+            return toast.success(`Goal created successfully`)
         } catch (e) {
-            console.error("Error creating goal:", e);
-            if (e.response) {
-                // If there is a response object, log its details
-                console.error("Response status:", e.response.status);
-                console.error("Response data:", e.response.data);
-            }
-            throw new Error("There was a problem creating your goal.");
+            throw new Error("There was a problem creating your goal.")
         }
     }
 

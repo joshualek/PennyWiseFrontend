@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { useFetcher } from "react-router-dom";
 import { CurrencyDollarIcon, TrashIcon } from "@heroicons/react/24/solid";
-import { formatCurrency } from "../helpers";
+import { formatCurrency, fetchData, getGoalsArray } from "../helpers";
 
-const GoalItem = ({ goal, goalId, updateGoals }) => {
+const GoalItem = ({ goal, updateGoals }) => {
     const fetcher = useFetcher();
     const [amount, setAmount] = useState("");
     const [isAdding, setIsAdding] = useState(false);
@@ -11,12 +11,6 @@ const GoalItem = ({ goal, goalId, updateGoals }) => {
     const [isDeleting, setIsDeleting] = useState(false);
 
     useEffect(() => {
-
-        const updateGoals = async () => {
-            const updatedGoals = await fetchDataDjango("goals/");
-            setGoalsList(updatedGoals);
-        };
-        
         if (fetcher.state === "idle") {
             updateGoals();
             setIsAdding(false);

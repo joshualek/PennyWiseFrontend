@@ -20,10 +20,10 @@ const deleteExpense = async (expenseId) => {
 };
 
 const categories = [
-    { id: 1, name: 'Food', color: '#FF5733' },
-    { id: 2, name: 'Transport', color: '#33FF57' },
-    { id: 3, name: 'Shopping', color: '#3357FF' },
-    { id: 4, name: 'Others', color: '#F333FF' },
+    { id: 1, name: 'Food', color: '#FF8C00' }, // Less bright orange
+    { id: 2, name: 'Transport', color: '#32CD32' }, // Less bright green
+    { id: 3, name: 'Shopping', color: '#4682B4' }, // Less bright blue
+    { id: 4, name: 'Others', color: '#DDA0DD' } // Less bright purple
 ];
 
 const getCategoryById = (id) => categories.find(category => category.id === id);
@@ -81,13 +81,15 @@ export const ExpenseItem = ({ expense }) => {
             <td>
                 {categoryDetails && (
                     <span
-                        style={{
-                            backgroundColor: categoryDetails.color,
-                            borderRadius: '12px',
-                            padding: '2px 8px',
-                            color: 'white',
-                            fontSize: '0.8em'
-                        }}
+                    style={{
+                        backgroundColor: categoryDetails.color,
+                        borderRadius: '20px', // Adjust border radius
+                        padding: '6px 14px', // Adjust padding
+                        color: 'white',
+                        fontSize: '1em', // Adjust font size
+                        display: 'inline-block',
+                        textAlign: 'center'
+                    }}
                     >
                         {categoryDetails.name}
                     </span>
