@@ -24,7 +24,7 @@ const Sidebar = ({ isVisible }) => {
                     <li>
                         <Link to="/dashboard">
                             <SpaceDashboardIcon width={24} />
-                            <span>DashboardHome</span>
+                            <span>Dashboard</span>
                         </Link>
                     </li>
                     <li>
@@ -36,7 +36,7 @@ const Sidebar = ({ isVisible }) => {
                     <li>
                         <Link to="/student-discounts">
                             <DiscountIcon width={24} />
-                            <span>DiscountsAnalytics</span>
+                            <span>Discounts</span>
                         </Link>
                     </li>
                     <li>

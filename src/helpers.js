@@ -267,3 +267,11 @@ export async function updateGoalProgress(goalId, amount) {
 }
 
 
+export const getSavingsGoalsArray = async () => {
+  try {
+      const savingsGoals = await fetchDataDjango("goals/");
+      return savingsGoals;
+  } catch (error) {
+      console.error('Error fetching savings goals:', error);
+  }
+};
