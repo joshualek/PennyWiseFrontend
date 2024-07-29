@@ -12,7 +12,7 @@ export const fetchData = (key) => {
 export async function fetchAnalyticsData() {
   const token = localStorage.getItem(ACCESS_TOKEN);
   try {
-      const response = await fetch('http://127.0.0.1:8000/api/analytics/', {
+      const response = await fetch('https://pennywisebackend.onrender.com/api/analytics/', {
           method: 'GET',
           headers: {
               'Content-Type': 'application/json',
@@ -35,7 +35,7 @@ export async function fetchAnalyticsData() {
 }
 
 export async function fetchDataDjango(endpoint, options = {}) {
-  const url = `http://127.0.0.1:8000/api/${endpoint}`;
+  const url = `https://pennywisebackend.onrender.com/api/${endpoint}`;
 
   const token = localStorage.getItem(ACCESS_TOKEN); 
 
@@ -81,7 +81,7 @@ export const getBudgetsArray = async () => {
 export async function createBudget({ name, amount}) {
   try {
     const token = localStorage.getItem(ACCESS_TOKEN);
-    const response = await fetch("http://127.0.0.1:8000/api/budgets/", {
+    const response = await fetch("https://pennywisebackend.onrender.com/api/budgets/", {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -115,7 +115,7 @@ export const createExpense = async ({ name, amount, budget, category }) => {
     category: category,
   };
 
-  const response = await fetch("http://127.0.0.1:8000/api/expenses/", {
+  const response = await fetch("https://pennywisebackend.onrender.com/api/expenses/", {
     method: 'POST',
     headers: {
       'Authorization': `Bearer ${accessToken}`,
@@ -134,7 +134,7 @@ export const createExpense = async ({ name, amount, budget, category }) => {
 export const createIncome = async ({ name, amount}) => {
   try {
     const token = localStorage.getItem(ACCESS_TOKEN);
-    const response = await fetch("http://127.0.0.1:8000/api/income/", {
+    const response = await fetch("https://pennywisebackend.onrender.com/api/income/", {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -160,7 +160,7 @@ export const createIncome = async ({ name, amount}) => {
 
 // delete item from local storage
 export async function deleteItem(endpoint) {
-  const url = `http://127.0.0.1:8000/api/${endpoint}`;
+  const url = `https://pennywisebackend.onrender.com/api/${endpoint}`;
 
   const token = localStorage.getItem(ACCESS_TOKEN);
 
@@ -223,7 +223,7 @@ export const formatCurrency = (amount) => {
 export async function createGoal({ name, target_amount }) {
   try {
       const token = localStorage.getItem(ACCESS_TOKEN);
-      const response = await fetch("http://127.0.0.1:8000/api/goals/", {
+      const response = await fetch("https://pennywisebackend.onrender.com/api/goals/", {
           method: 'POST',
           headers: {
               'Content-Type': 'application/json',
@@ -248,7 +248,7 @@ export async function createGoal({ name, target_amount }) {
 
 export async function updateGoalProgress(goalId, amount) {
   const token = localStorage.getItem(ACCESS_TOKEN);
-  const response = await fetch(`http://127.0.0.1:8000/api/goals/${goalId}/`, {
+  const response = await fetch(`https://pennywisebackend.onrender.com/api/goals/${goalId}/`, {
     method: 'PATCH',
     headers: {
       'Content-Type': 'application/json',
