@@ -99,7 +99,7 @@ export async function dashboardAction({ request }) {
 }
 
 const Dashboard = () => {
-    const { userName, budgets, expenses, income } = useLoaderData()
+    const { userName, budgets, expenses, income, categories } = useLoaderData()
     console.log("Rendering Dashboard with data:", { userName, budgets, expenses, income });
 
     // sidebar
@@ -136,7 +136,7 @@ const Dashboard = () => {
                                         <div className="grid-md">
 
                                             <h2>Recent Expenses</h2>
-                                            <Table
+                                            <Table categories={categories}
                                                 expenses={expenses
                                                     .sort((a, b) => b.createdAt - a.createdAt)
                                                     .slice(0, 8)}
