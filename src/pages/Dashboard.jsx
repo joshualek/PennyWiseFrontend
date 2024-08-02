@@ -15,6 +15,7 @@ import BudgetItem from "../components/BudgetItem"
 import IncomeItem from "../components/IncomeItem"
 import Table from "../components/Table"
 import IncomeTable from "../components/IncomeTable"
+import ExportButton from "../components/ExportButton";
 
 // Pages
 import Intro from "../pages/Intro"
@@ -164,6 +165,7 @@ const Dashboard = () => {
                                             )}
                                         </div>
                                     )}
+                                    <ExportButton />
                                 </div>
                             ) : (
                                 <div className="grid-sm">
