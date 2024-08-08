@@ -71,7 +71,7 @@ const GoalItem = ({ goal, updateGoals }) => {
         <div className="goal-item" style={styles.goalItem}>
             <div className="progress-text" style={styles.progressText}>
                 <h3 style={styles.goalName}>{goal.name}</h3>
-                <p style={styles.goalTarget}>{formatCurrency(goal.target_amount)} Goal</p>
+                <p style={styles.goalTarget}>Goal: ${formatCurrency(goal.target_amount)}</p>
             </div>
             <div className="progress-bar" style={styles.progressBarContainer}>
                 <div
@@ -138,7 +138,7 @@ const styles = {
         padding: '16px',
         margin: '8px 0',
         backgroundColor: `var(--bkg)`,
-        width: `calc(100% / 4.5)` ,
+        width: `calc(100% / 4.5)`,
     },
     progressText: {
         display: 'flex',
@@ -147,20 +147,21 @@ const styles = {
         marginBottom: '8px',
     },
     goalName: {
-        fontSize: '1.25rem',
+        fontSize: '1.2rem',
         fontWeight: 'bold',
     },
     goalTarget: {
         fontSize: '0.875rem',
-        color: '#666',
+        color: '#1a6299',
     },
     progressBarContainer: {
         width: '100%',
         backgroundColor: '#eee',
-        borderRadius: '4px',
+        borderRadius: '20px',
         overflow: 'hidden',
         height: '24px',
-        marginBottom: '8px',
+        margin: '10px 0 10px 0',
+        position: 'relative',
     },
     progressBar: {
         height: '100%',
@@ -168,6 +169,7 @@ const styles = {
         textAlign: 'center',
         lineHeight: '24px',
         fontSize: '0.875rem',
+        borderRadius: '20px',
         transition: 'width 0.3s ease-in-out',
     },
     progressDetails: {
@@ -208,7 +210,7 @@ const styles = {
         padding: '8px',
         backgroundColor: '#333',
         color: '#fff',
-        borderRadius: '4px',
+        borderRadius: '20px',
         border: 'none',
         cursor: 'pointer',
     },
@@ -216,7 +218,7 @@ const styles = {
         backgroundColor: '#28a745',
         color: '#fff',
         padding: '8px',
-        borderRadius: '4px',
+        borderRadius: '20px',
         border: 'none',
         cursor: 'pointer',
         marginBottom: '8px',
@@ -225,7 +227,7 @@ const styles = {
         backgroundColor: '#dc3545',
         color: '#fff',
         padding: '8px',
-        borderRadius: '4px',
+        borderRadius: '20px',
         border: 'none',
         cursor: 'pointer',
     },

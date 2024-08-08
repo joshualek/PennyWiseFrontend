@@ -29,13 +29,12 @@ const AnalyticsBox = ({ title, value }) => {
 
   return (
     <ThemeProvider theme={theme}>
-      <Card sx={{ width: "300px", height: "110px", borderRadius: "25px" }} className="analyticsbox">
+      <Card sx={{ width: "300px", height: "130px", borderRadius: "20px", padding: "25px" }}>
         <CardActionArea onClick={() => navigate('#')}>
           <Box sx={{ height: '100%', display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
             <Typography
-              variant="h6"
               fontWeight="bold"
-              sx={{ color: "#000000", textAlign: 'center' }}
+              sx={{ fontSize: '1.1rem', color: "#000000", textAlign: 'center' }}
             >
               {title}
             </Typography>

@@ -29,11 +29,6 @@ const deleteBudget = async (budgetId, navigate) => {
     }
 }
 
-
-
-
-
-
 const BudgetItem = ({ budget, showDelete = false, expensesCounter }) => {
     const { id, name, amount} = budget;
     const [budgetData, setBudgetData] = useState({ name: '', amount: 0});
@@ -73,7 +68,7 @@ const BudgetItem = ({ budget, showDelete = false, expensesCounter }) => {
         <div className="budget" style={{ "--accent": accentColor }}>
             <div className="progress-text">
                 <h3>{budgetData.name}</h3>
-                <p>${formatCurrency(budgetData.amount)} Budgeted</p>
+                <p>Budgeted: ${formatCurrency(budgetData.amount)}</p>
             </div>
             <progress max={budgetData.amount} value={spent}>
                 {formatPercentage(percentageSpent)}

@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from "react";
-import { Link, useLoaderData, useFetcher } from "react-router-dom";
+import React, { useState } from "react";
+import { Link, useLoaderData } from "react-router-dom";
 
 // Library
 import { toast } from "react-toastify"
@@ -45,6 +45,7 @@ export async function goalAction({ request }) {
             await fetchDataDjango(`goals/delete/${goalId}/`, {
                 method: "DELETE",
             });
+            toast.success('Goal deleted successfully');
             return { success: true };
         } catch (e) {
             console.error("Error deleting goal:", e);
@@ -64,6 +65,7 @@ export async function goalAction({ request }) {
                 method: "POST",
                 body: JSON.stringify({ amount }),
             });
+            toast.success('Savings added to goal successfully');
             return { success: true };
         } catch (e) {
             console.error("Error creating goal:", e);
@@ -82,6 +84,7 @@ export async function goalAction({ request }) {
             await fetchDataDjango(`goals/${goalId}/redeem/`, {
                 method: "POST",
             });
+            toast.success('Goal redeemed successfully');
             return { success: true };
         } catch (e) {
             console.error("Error redeeming goal:", e);
@@ -98,7 +101,6 @@ export async function goalAction({ request }) {
 const GoalPage = () => {
     const { userName, goals } = useLoaderData();
     const [goalsList, setGoalsList] = useState(goals);
-    const fetcher = useFetcher();
 
     // sidebar
     const [sidebarVisible, setSidebarVisible] = useState(true);
@@ -124,7 +126,7 @@ const GoalPage = () => {
                         <Nav userName={userName} /> 
                     <div className="grid-lg">
                         <h1 className="h2">
-                            Goals Overview
+                            All Goals
                         </h1>
                         <AddGoalsForm updateGoals={updateGoals} />
                         <div className="flex-spread">
@@ -135,10 +137,6 @@ const GoalPage = () => {
                             ) : (
                                 <p>No goals found</p>
                             )}
-                        </div>
-                        <div className="flex-sm">
-                            <Link to="/home" className="btn btn--primary">Back to Home</Link>
-                            <Link to="/dashboard" className="btn btn--primary">Back to Dashboard</Link>
                         </div>
                     </div>
                 </div>

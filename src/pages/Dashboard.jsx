@@ -136,7 +136,6 @@ const Dashboard = () => {
                                     </div>
                                     {expenses && expenses.length > 0 && (
                                         <div className="grid-md">
-
                                             <h2>Recent Expenses</h2>
                                             <Table categories={categories}
                                                 expenses={expenses

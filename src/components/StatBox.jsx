@@ -28,14 +28,13 @@ const theme = createTheme({
 // Statbox component template
 const StatBox = ({ title, subtitle, icon, link, progress }) => {
   const navigate = useNavigate(); 
-
   const handleClick = () => {
     navigate(link);
   };
 
   return (
     <ThemeProvider theme={theme}>
-      <Card sx={{ width: "300px", height: "110px", borderRadius: "25px" }} className="statbox">
+      <Card sx={{ width: "300px", height: "145px", borderRadius: "20px" }} className="content-box statbox">
         <CardActionArea onClick={handleClick}>
           <Box>
             <Box display="flex" justifyContent="space-between">
@@ -54,7 +53,7 @@ const StatBox = ({ title, subtitle, icon, link, progress }) => {
             </Box>
             <Box display="flex" justifyContent="space-between" mt="2px">
               <Typography
-                variant="h5"
+                variant="h4"
                 fontWeight="bold"
                 sx={{ color: "#1a6299" }}>
                 {subtitle}

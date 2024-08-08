@@ -4,20 +4,18 @@ import { useLoaderData } from "react-router-dom";
 // Library
 import { ResponsiveBar } from '@nivo/bar';
 import { ResponsivePie } from '@nivo/pie';
-import { ResponsiveLine } from '@nivo/line';
-import { Container, Typography, Box, Grid, Card, CardContent, Select, MenuItem, FormControl, InputLabel, useTheme } from '@mui/material';
+import { Box, Grid, Select, MenuItem, FormControl, InputLabel, useTheme } from '@mui/material';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
 
 // Components
 import Sidebar from "../components/Sidebar";
 import Nav from "../components/Nav";
 import AnalyticsBox from "../components/AnalyticsBox";
+import Piechart from "../components/charts/Piechart";
+
 
 // Helper functions
 import { fetchData, fetchDataDjango } from "../helpers";
-
-// Mock Data
-import { mockStatData } from "../data/mockData";
 
 // Heroicons
 import { Bars3Icon } from '@heroicons/react/24/solid';
@@ -34,7 +32,6 @@ const AnalyticsPage = () => {
     const [sidebarVisible, setSidebarVisible] = useState(true);
     const [selectedMonth, setSelectedMonth] = useState(new Date().toLocaleString('default', { month: 'long' }));
     const [analyticsData, setAnalyticsData] = useState(initialAnalyticsData);
-    const theme = useTheme();
 
     const toggleSidebar = () => {
         setSidebarVisible(!sidebarVisible);
@@ -50,7 +47,7 @@ const AnalyticsPage = () => {
 
     // Format the data for the line chart
     const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
-    
+
     const spendingPerMonthData = analyticsData.spending_per_month.map(item => ({
         month: months[item.month - 1],
         total_spent: item.total_spent,
@@ -84,6 +81,28 @@ const AnalyticsPage = () => {
         value: item.total_spent
     }));
 
+    // Pie Chart colours
+    const customColors = ({ id, data }) => {
+        if (id === 'Food') return '#87CEEB';
+        if (id === 'Transport') return '#00B4D8';
+        if (id === 'Shopping') return '#2C7DA0';
+        return '#1a6299'; // Default: Blue color
+    };
+    // for chart labels
+    const theme = {
+        labels: {
+            text: {
+                fontSize: 15, 
+                fontWeight: 'bold',
+            },
+        },
+        legends: {
+            text: {
+                fontSize: 15, 
+                fontWeight: 'bold',
+            },
+        },
+    };
     return (
         <div className="dashboard-container">
             <Sidebar isVisible={sidebarVisible} />
@@ -92,10 +111,8 @@ const AnalyticsPage = () => {
                 <button className="toggle-sidebar-btn" onClick={toggleSidebar}>
                     <Bars3Icon />
                 </button>
-                <Container>
-                    <Typography variant="h4" gutterBottom>
-                        Analytics
-                    </Typography>
+                <div className="grid-lg">
+                    <h2>Analytics</h2>
                     <FormControl fullWidth variant="outlined" margin="normal">
                         <InputLabel id="month-select-label">Month</InputLabel>
                         <Select
@@ -111,7 +128,7 @@ const AnalyticsPage = () => {
                             ))}
                         </Select>
                     </FormControl>
-                    <Grid container spacing={4}>
+                    <Grid container spacing={4} justifyContent="center" alignItems="center">
                         {[
                             { title: "Most Spent on Category", value: `${analyticsData.most_spent_category?.category__name || "N/A"} ($${analyticsData.most_spent_category?.total_spent?.toFixed(2) || 0})` },
                             { title: "Least Spent on Category", value: `${analyticsData.least_spent_category?.category__name || "N/A"} ($${analyticsData.least_spent_category?.total_spent?.toFixed(2) || 0})` },
@@ -120,32 +137,30 @@ const AnalyticsPage = () => {
                             { title: "Total Spending This Month", value: `$${analyticsData.total_spent_current_month?.toFixed(2) || 0}` },
                             { title: "Budgets Exceeded", value: `${analyticsData.budgets_exceeded}` },
                         ].map((stat, index) => (
-                            <Grid item xs={12} sm={6} md={4} key={index}>
+                            <Grid item xs={12} sm={6} md={4} key={index} display="flex" justifyContent="center" alignItems="center">
                                 <AnalyticsBox title={stat.title} value={stat.value} />
                             </Grid>
                         ))}
                     </Grid>
                     <Box my={4}>
-                        <Typography variant="h5" gutterBottom>
-                            Monthly Spending and Net Income
-                        </Typography>
+                        <h3>Monthly Spending and Net Income</h3>
                         <div style={{ height: 400 }}>
                             <ResponsiveContainer>
-                                <LineChart 
-                                    data={lineChartData} 
+                                <LineChart
+                                    data={lineChartData}
                                     margin={{ top: 20, right: 30, bottom: 70, left: 20 }}  // Adjust the bottom margin here
                                 >
                                     <CartesianGrid strokeDasharray="3 3" />
-                                    <XAxis 
-                                        dataKey="month" 
+                                    <XAxis
+                                        dataKey="month"
                                         tick={{ fontSize: 12 }}  // Adjust the font size of the tick labels
                                         angle={-45}              // Rotate the tick labels if needed
                                         textAnchor="end"         // Align the rotated labels
                                     />
-                                    <YAxis 
+                                    <YAxis
                                         tick={{ fontSize: 12 }}  // Adjust the font size of the tick labels
                                     />
-                                    <Tooltip 
+                                    <Tooltip
                                         formatter={(value, name) => {
                                             const formattedValue = `$${value.toFixed(2)}`;
                                             if (name === 'total_spent') {
@@ -157,7 +172,7 @@ const AnalyticsPage = () => {
                                         }}
                                         contentStyle={{ fontSize: '12px' }}  // Adjust the font size of the tooltip text
                                     />
-                                    <Legend 
+                                    <Legend
                                         formatter={(value) => {
                                             switch (value) {
                                                 case 'total_spent':
@@ -180,9 +195,7 @@ const AnalyticsPage = () => {
                         </div>
                     </Box>
                     <Box my={4}>
-                        <Typography variant="h5" gutterBottom>
-                            Weekly Expenses for the Month
-                        </Typography>
+                        <h3>Weekly Expenses for the Month</h3>
                         <div style={{ height: 400 }}>
                             <ResponsiveBar
                                 data={weeklyExpensesData}
@@ -192,7 +205,7 @@ const AnalyticsPage = () => {
                                 padding={0.3}
                                 valueScale={{ type: 'linear' }}
                                 indexScale={{ type: 'band', round: true }}
-                                colors={ "#7dbddd" }
+                                colors={"#7dbddd"}
                                 defs={[
                                     {
                                         id: 'lines',
@@ -224,6 +237,7 @@ const AnalyticsPage = () => {
                                 labelSkipWidth={12}
                                 labelSkipHeight={12}
                                 labelTextColor={{ from: 'color', modifiers: [['darker', 1.6]] }}
+                                theme={theme}
                                 legends={[
                                     {
                                         dataFrom: 'keys',
@@ -266,9 +280,7 @@ const AnalyticsPage = () => {
                         </div>
                     </Box>
                     <Box my={4}>
-                        <Typography variant="h5" gutterBottom>
-                            Spending by Category
-                        </Typography>
+                        <h3>Spending by Category</h3>
                         <div style={{ height: 400 }}>
                             <ResponsivePie
                                 data={spendingByCategoryData}
@@ -276,7 +288,7 @@ const AnalyticsPage = () => {
                                 innerRadius={0.5}
                                 padAngle={0.7}
                                 cornerRadius={3}
-                                colors={{ scheme: 'blues',  modifiers: [['darker', 1]] }}
+                                colors={customColors}
                                 borderWidth={1}
                                 borderColor={{ from: 'color', modifiers: [['darker', 0.6]] }}
                                 radialLabelsSkipAngle={10}
@@ -284,6 +296,7 @@ const AnalyticsPage = () => {
                                 radialLabelsLinkColor={{ from: 'color' }}
                                 sliceLabelsSkipAngle={10}
                                 sliceLabelsTextColor="#333333"
+                                theme={theme}
                                 legends={[
                                     {
                                         anchor: 'bottom',
@@ -309,17 +322,11 @@ const AnalyticsPage = () => {
                                         ],
                                     },
                                 ]}
-                                tooltip={({ id, value, color }) => (
-                                    <div style={{ background: 'black', padding: '5px', border: '1px solid #ccc', color }}>
-                                        <strong>{id}</strong>
-                                        <br />
-                                        Amount: ${value}
-                                    </div>
-                                )}
+
                             />
                         </div>
                     </Box>
-                </Container>
+                </div>
             </div>
         </div>
     );

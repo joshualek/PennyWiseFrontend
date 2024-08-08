@@ -1,18 +1,25 @@
 import React, { useState, useEffect } from "react";
-import { Link, useLoaderData } from "react-router-dom";
+import { Link, useLoaderData, useNavigate } from "react-router-dom";
+
+// Libraries
 import { Bars3Icon } from '@heroicons/react/24/solid';
-import { Box } from "@mui/material";
+import { Box, CardActionArea } from "@mui/material";
 import CreditCardIcon from '@mui/icons-material/CreditCard';
 import RequestQuoteIcon from '@mui/icons-material/RequestQuote';
 import MonetizationOnIcon from '@mui/icons-material/MonetizationOn';
 import DashboardIcon from '@mui/icons-material/Dashboard';
-import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, PieChart, Pie, Cell, Legend } from 'recharts';
+import { createTheme, ThemeProvider } from '@mui/material/styles';
+import { ResponsiveContainer } from 'recharts';
+
 
 // Components
 import Sidebar from "../components/Sidebar";
 import Nav from "../components/Nav";
 import StatBox from "../components/StatBox";
 import StudentDiscountCard from "../components/StudentDiscountCard"
+import Barchart from "../components/charts/Barchart";
+import Piechart from "../components/charts/Piechart";
+import GoalItemMini from "../components/GoalItemMini";
 
 // Pages
 import Intro from "../pages/Intro";
@@ -28,16 +35,45 @@ export async function homeLoader() {
     const expenses = await fetchDataDjango("expenses/");
     const income = await fetchDataDjango("income/");
     const categories = await fetchDataDjango("category/");
-    return { userName, budgets, expenses, income, categories };
+    const goals = await fetchDataDjango("goals/");
+    return { userName, budgets, expenses, income, categories, goals };
 }
 
+// Override to prevent a grey background from appearing when hovering on the card
+const theme = createTheme({
+    components: {
+        MuiCardActionArea: {
+            styleOverrides: {
+                focusHighlight: {
+                    backgroundColor: 'transparent !important',
+                },
+            },
+        },
+        MuiTouchRipple: {
+            styleOverrides: {
+                root: {
+                    overflow: 'visible',
+                },
+            },
+        },
+    },
+});
+
 const Home = () => {
-    const { userName, budgets, expenses, income, categories } = useLoaderData();
-    
+    const { userName, budgets, expenses, income, categories, goals } = useLoaderData();
+    const [goalsList, setGoalsList] = useState(goals);
+
+
     // sidebar
     const [sidebarVisible, setSidebarVisible] = useState(true);
     const toggleSidebar = () => {
         setSidebarVisible(!sidebarVisible);
+    };
+
+    // Card Navigation
+    const navigate = useNavigate();
+    const handleAnalyticsClick = () => {
+        navigate("/analytics");
     };
 
     // data for summary stats in StatBox
@@ -59,7 +95,7 @@ const Home = () => {
             .filter(expense => expense.category === category.id)
             .reduce((sum, expense) => sum + Number(expense.amount), 0)
     }));
-        
+
     // Student Discount
     const [discounts, setDiscounts] = useState([]);
     useEffect(() => {
@@ -80,23 +116,19 @@ const Home = () => {
                     </button>
                     <div className={`dashboard ${sidebarVisible ? '' : 'dashboard-expanded'}`}>
                         <Nav userName={userName} />
-                        <h1>Welcome back, <span className="accent">{userName}</span></h1>
-                        <p>Personal budgeting is the secret to financial freedom.</p>
+                        <div>
+                            <h1>Welcome back, <span className="accent">{userName}</span></h1>
+                            <p><i>Personal budgeting is the secret to financial freedom.</i></p>
+                        </div>
                         <div className="grid-sm">
                             {budgets && budgets.length > 0 ? (
                                 <div className="grid-lg">
-                                    <div className="flex-sm">
-                                        <h3>Dashboard Overview</h3>
-                                        <Link to="/dashboard">
-                                            <DashboardIcon width={24} />
-                                        </Link>
-                                    </div>
+                                    <h2>Dashboard Overview</h2>
                                     <Box
                                         display="flex"
                                         flexWrap="wrap"
                                         alignItems="center"
                                         justifyContent="space-between"
-                                        className="statbox-area"
                                     >
                                         <StatBox
                                             title="Total Income"
@@ -135,50 +167,47 @@ const Home = () => {
                                             link="/dashboard"
                                         />
                                     </Box>
-                                    <div style={{ marginTop: '40px', display: 'flex', gap: '20px' }}> {/* Flex container for charts */}
-                                        <div style={{ flex: 1 }}>
-                                            <h3 style={{ marginBottom: '20px' }}>Income vs Expenses</h3>
-                                            <ResponsiveContainer width="100%" height={400}>
-                                                <PieChart>
-                                                    <Pie
-                                                        data={incomeExpensesData}
-                                                        dataKey="value"
-                                                        nameKey="name"
-                                                        outerRadius={150}
-                                                    >
-                                                        {incomeExpensesData.map((entry, index) => (
-                                                            <Cell key={`cell-${index}`} fill={index === 0 ? "#1a6299" : "#7DBDDD"} />
-                                                        ))}
-                                                    </Pie>
-                                                    <Tooltip formatter={(value, name) => [`$${value}`, name]} />
-                                                    <Legend />
-                                                </PieChart>
-                                            </ResponsiveContainer>
-                                            <small>Income: ${totalIncome} | </small> {/* Display income */}
-                                            <small>Expenses: ${totalExpenses}</small> {/* Display expenses */}
+
+                                    <div style={{ display: 'flex', gap: '20px' }}> {/* Flex container for charts */}
+                                        <div className="content-box content-box-boxed">
+                                            <ThemeProvider theme={theme}>
+                                                <CardActionArea onClick={handleAnalyticsClick} style={{ overflow: 'hidden' }}> {/* Remove absolute positioning */}
+                                                    <div style={{ width: '100%', padding: '20px' }}> {/* Add padding here */}
+                                                        <h3 style={{ marginBottom: '20px' }}>Income vs Expenses</h3>
+                                                        <ResponsiveContainer width="100%" height={500}>
+                                                            <Piechart data={incomeExpensesData} />
+                                                        </ResponsiveContainer>
+                                                    </div>
+                                                </CardActionArea>
+                                            </ThemeProvider>
                                         </div>
-                                        <div style={{ flex: 1 }}>
-                                            <h3 style={{ marginBottom: '20px' }}>Spending by Category</h3>
-                                            <ResponsiveContainer width="100%" height={400}>
-                                                <BarChart data={categorySpendingData}>
-                                                    <CartesianGrid strokeDasharray="3 3" />
-                                                    <XAxis dataKey="name" />
-                                                    <YAxis />
-                                                    <Tooltip />
-                                                    <Bar dataKey="value" fill="#1a6299" />
-                                                </BarChart>
-                                            </ResponsiveContainer>
+                                        <div className="content-box content-box-boxed">
+                                            <ThemeProvider theme={theme}>
+                                                <CardActionArea onClick={handleAnalyticsClick} style={{ overflow: 'hidden' }}> {/* Remove absolute positioning */}
+                                                    <div style={{ width: '100%', padding: '20px' }}>
+                                                        <h3 style={{ marginBottom: '20px' }}>Spending by Category</h3>
+                                                        <ResponsiveContainer width="100%" height={500}>
+                                                            <Barchart data={categorySpendingData} />
+                                                        </ResponsiveContainer>
+                                                    </div>
+                                                </CardActionArea>
+                                            </ThemeProvider>
+                                        </div>
+                                        <div className="content-box-boxed">
+                                            <div style={{ width: '100%', padding: '20px' }}>
+                                                <h3 style={{ marginBottom: '20px' }}>Goals</h3>
+                                                {goalsList && goalsList.length > 0 ? (
+                                                    goalsList.slice(0, 4).map((goal) => (
+                                                        <GoalItemMini key={goal.id} goal={goal} className="content-box" />
+                                                    ))
+                                                ) : (
+                                                    <p>No goals available</p>
+                                                )}
+                                            </div>
                                         </div>
                                     </div>
-                                    <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: 40}}>
-                                        <Link to="/analytics">
-                                            <button className="btn btn--primary">Go to Analytics</button>
-                                        </Link>
-                                        <Link to="/dashboard">
-                                            <button className="btn btn--secondary">Expand Dashboard</button>
-                                        </Link>
-                                    </div>
-                                    <h3>Student Discounts Overview</h3>
+
+                                    <h2>Student Discounts Overview</h2>
                                     <div className="flex-md">
                                         {discounts.map((discount, index) => (
                                             <StudentDiscountCard
