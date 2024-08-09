@@ -69,7 +69,7 @@ export const IncomeTable = ({ income, incomeId }) => {
                     <thead>
                         <tr>
                             {
-                                ["Name", "Amount", "Date"].map((header, index) => (
+                                ["Name", "Amount", "Date", ""].map((header, index) => (
                                     <th key={index}>{header}</th>
                                 ))
                             }

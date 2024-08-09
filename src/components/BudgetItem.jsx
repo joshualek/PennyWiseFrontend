@@ -3,13 +3,14 @@ import { Form, Link, useNavigate } from "react-router-dom"
 
 // Library
 import { toast } from "react-toastify";
+import { BanknotesIcon } from "@heroicons/react/24/outline"
+import { TrashIcon } from "@heroicons/react/24/solid"
+import { Card, CardActionArea, Box, Typography } from '@mui/material';
+import { createTheme, ThemeProvider } from '@mui/material/styles';
 
 // Helpers
 import { calculateSpentByBudget, deleteItem, formatPercentage, formatCurrency, getBudgetsArray, fetchExpensesByBudgetId } from "../helpers"
 
-// Heroicons
-import { BanknotesIcon } from "@heroicons/react/24/outline"
-import { TrashIcon } from "@heroicons/react/24/solid"
 
 const deleteBudget = async (budgetId, navigate) => {
     console.log(`budgetID here is: `, budgetId)
@@ -34,6 +35,9 @@ const BudgetItem = ({ budget, showDelete = false, expensesCounter }) => {
     const [budgetData, setBudgetData] = useState({ name: '', amount: 0});
     const [spent, setSpent] = useState(0);
     const navigate = useNavigate();
+    const handleClick = () => {
+        navigate(`/budget/${id}`);
+      };
 
     useEffect(() => {
         const fetchBudgetData = async () => {
@@ -62,10 +66,9 @@ const BudgetItem = ({ budget, showDelete = false, expensesCounter }) => {
         accentColor = "36, 100%, 50%"; // Amber
     }
 
-
-
     return (
         <div className="budget" style={{ "--accent": accentColor }}>
+            <CardActionArea onClick={handleClick} style={{ padding: '16px'}}>
             <div className="progress-text">
                 <h3>{budgetData.name}</h3>
                 <p>Budgeted: ${formatCurrency(budgetData.amount)}</p>
@@ -77,6 +80,7 @@ const BudgetItem = ({ budget, showDelete = false, expensesCounter }) => {
                 <small>{formatCurrency(spent)} Spent</small>
                 <small>{formatCurrency(budgetData.amount - spent)} Remaining</small>
             </div>
+          
             {
                 showDelete ? (
                     <div className="flex-sm">
@@ -86,20 +90,13 @@ const BudgetItem = ({ budget, showDelete = false, expensesCounter }) => {
                             }
                         }}>
                             <button type="submit" onClick={() => deleteBudget(budget.id, navigate)} className="btn btn--warning">
-                                <span>Delete Budget</span>
                                 <TrashIcon width={20} />
                             </button>
                         </Form>
                     </div>
-                ) : (
-                    <div className="flex-sm">
-                        <Link to={`/budget/${id}`} className="btn">
-                            <span>View Details</span>
-                            <BanknotesIcon width={20} />
-                        </Link>
-                    </div>
-                )
+                ) : null
             }
+        </CardActionArea>
         </div>
     )
 }

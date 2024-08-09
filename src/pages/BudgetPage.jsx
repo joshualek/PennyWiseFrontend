@@ -119,10 +119,6 @@ const BudgetPage = () => {
                                 </div>
                             ) : <p>No expenses found</p>
                         }
-                        <div className="flex-sm">
-                            <Link to="/home" className="btn btn--primary">Back to Home</Link>
-                            <Link to="/dashboard" className="btn btn--primary">Back to Dashboard</Link>
-                        </div>
                     </div>
                 </div>
             </div>

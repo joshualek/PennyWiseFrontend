@@ -6,7 +6,7 @@ const ExportButton = () => {
     const handleExport = async () => {
         try {
             const token = localStorage.getItem(ACCESS_TOKEN);
-            const response = await fetch('http://127.0.0.1:8000/api/export/', {
+            const response = await fetch('https://pennywisebackend.onrender.com/api/export/', {
                 method: 'GET',
                 headers: {
                     'Content-Type': 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',

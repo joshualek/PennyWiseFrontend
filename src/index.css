@@ -270,7 +270,7 @@ p {
   flex-wrap: wrap;
   -webkit-box-align: start;
   -ms-flex-align: start;
-  align-items: start;
+  align-items: center;
   gap: var(--space-sm);
 }
 
@@ -404,13 +404,11 @@ select {
 
 .forms-container> :first-child {
   margin-right: 10px;
-  /* Adjust the 20px to the desired gap */
 }
 
 .forms-container> :nth-child(2) {
   margin-left: 10px;
   margin-right: 10px;
-  /* Adjust the 20px to the desired gap */
 }
 
 .forms-container> :nth-child(3) {
@@ -484,7 +482,6 @@ select {
   position: fixed;
   top: 28px;
   left: 0px;
-  /* Adjust according to sidebar width */
   z-index: 1000;
   background-color: transparent;
   color: hsl(206, 71%, 35%);
@@ -533,7 +530,6 @@ select {
   content: "";
   position: absolute;
   inset: 0.55rem;
-  /* border: 2px dashed hsl(var(--text)); */
   border-radius: calc(var(--round-lg) * 0.6);
   z-index: -1;
 }
@@ -560,6 +556,8 @@ select {
   -ms-flex-wrap: wrap;
   flex-wrap: wrap;
   gap: var(--space-md);
+  justify-content: space-between; /* Add this line */
+
 }
 
 .budget {
@@ -575,10 +573,13 @@ select {
   background-color: var(--bkg);
   border-radius: var(--round-lg);
   border: 3px solid hsl(var(--backdrop));
-  padding: calc(var(--space-md) / 1.5) calc(var(--space-md) / 1.2);
   gap: var(--space-sm);
   text-decoration: none;
   color: hsl(var(--backdrop));
+}
+
+.budget:hover {
+  box-shadow: 0.1em 0.1em 1em hsl(var(--backdrop));
 }
 
 .budget>.flex-sm {
@@ -602,6 +603,7 @@ select {
   -ms-flex-pack: justify;
   justify-content: space-between;
   gap: var(--space-lg);
+  padding: 10px;
 }
 
 .progress-text :nth-child(2) {

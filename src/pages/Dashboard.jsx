@@ -51,7 +51,7 @@ export async function dashboardAction({ request }) {
             await createBudget({
                 name: values.newBudget,
                 amount: values.newBudgetAmount,
-            
+
             })
             return toast.success(`Budget created successfully`)
         } catch (e) {
@@ -78,7 +78,7 @@ export async function dashboardAction({ request }) {
             throw new Error("There was a problem creating your expense.");
         }
     }
-    
+
     if (_action === "deleteExpense") {
         return null;
     }
@@ -128,7 +128,7 @@ const Dashboard = () => {
                                         <AddExpenseForm budgets={budgets} />
                                         <AddIncomeForm />
                                     </div>
-                                    <h2>Existing Budgets</h2>
+                                    <h2>All Budgets</h2>
                                     <div className="budgets">
                                         {budgets.map((budget) => (
                                             <BudgetItem key={budget.id} budget={budget} />
@@ -136,33 +136,32 @@ const Dashboard = () => {
                                     </div>
                                     {expenses && expenses.length > 0 && (
                                         <div className="grid-md">
-                                            <h2>Recent Expenses</h2>
+                                            <div className="flex-sm">
+                                                <h2>Recent Expenses</h2>
+                                                <Link to="/expenses" className="btn btn--dark">
+                                                    View all expenses
+                                                </Link>
+                                            </div>
                                             <Table categories={categories}
                                                 expenses={expenses
                                                     .sort((a, b) => b.createdAt - a.createdAt)
                                                     .slice(0, 8)}
                                             />
-                                            {expenses.length > 0 && (
-                                                <Link to="/expenses" className="btn btn--dark">
-                                                    View all expenses
-                                                </Link>
-                                            )}
                                         </div>
                                     )}
                                     {income && income.length > 0 && (
                                         <div className="grid-md">
-
-                                            <h2>Recent Income</h2>
+                                            <div className="flex-sm">
+                                                <h2>Recent Income</h2>
+                                                <Link to="/income" className="btn btn--dark">
+                                                    View all income
+                                                </Link>
+                                            </div>
                                             <IncomeTable
                                                 income={income
                                                     .sort((a, b) => b.createdAt - a.createdAt)
                                                     .slice(0, 8)}
                                             />
-                                            {income.length > 0 && (
-                                                <Link to="/income" className="btn btn--dark">
-                                                    View all income
-                                                </Link>
-                                            )}
                                         </div>
                                     )}
                                     <ExportButton />
