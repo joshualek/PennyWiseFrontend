@@ -572,7 +572,6 @@ select {
   box-shadow: 0.25em 0.3em 1em hsl(var(--muted) / 0.2);
   background-color: var(--bkg);
   border-radius: var(--round-lg);
-  border: 3px solid hsl(var(--backdrop));
   gap: var(--space-sm);
   text-decoration: none;
   color: hsl(var(--backdrop));
