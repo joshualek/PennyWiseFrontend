@@ -37,6 +37,7 @@ const AddIncomeForm = () => {
                         placeholder="eg. $500" 
                         step="0.01"
                         inputMode="decimal"
+                        min="0"
                         required
                         ref={focusRef} />
                 </div>
