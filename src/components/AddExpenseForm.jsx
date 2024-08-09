@@ -51,6 +51,7 @@ const AddExpenseForm = ({ budgets }) => {
                         placeholder="eg. $5" 
                         step="0.01"
                         inputMode="decimal"
+                        min="0"
                         required />
                 </div>
                 <div className="grid-xs" hidden={budgets.length === 1}>
