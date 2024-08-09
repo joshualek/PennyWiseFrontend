@@ -194,138 +194,145 @@ const AnalyticsPage = () => {
                             </ResponsiveContainer>
                         </div>
                     </Box>
-                    <Box my={4}>
-                        <h3>Weekly Expenses for the Month</h3>
-                        <div style={{ height: 400 }}>
-                            <ResponsiveBar
-                                data={weeklyExpensesData}
-                                keys={['total_spent']}
-                                indexBy="week"
-                                margin={{ top: 50, right: 130, bottom: 50, left: 60 }}
-                                padding={0.3}
-                                valueScale={{ type: 'linear' }}
-                                indexScale={{ type: 'band', round: true }}
-                                colors={"#7dbddd"}
-                                defs={[
-                                    {
-                                        id: 'lines',
-                                        type: 'patternLines',
-                                        background: 'inherit',
-                                        color: '#eed312',
-                                        rotation: -45,
-                                        lineWidth: 6,
-                                        spacing: 10,
-                                    },
-                                ]}
-                                borderColor={{ from: 'color', modifiers: [['darker', 1.6]] }}
-                                axisTop={null}
-                                axisRight={null}
-                                axisBottom={{
-                                    tickSize: 5,
-                                    tickPadding: 5,
-                                    tickRotation: 0,
-                                    legendPosition: 'middle',
-                                    legendOffset: 32,
-                                }}
-                                axisLeft={{
-                                    tickSize: 5,
-                                    tickPadding: 5,
-                                    tickRotation: 0,
-                                    legendPosition: 'middle',
-                                    legendOffset: -40,
-                                }}
-                                labelSkipWidth={12}
-                                labelSkipHeight={12}
-                                labelTextColor={{ from: 'color', modifiers: [['darker', 1.6]] }}
-                                theme={theme}
-                                legends={[
-                                    {
-                                        dataFrom: 'keys',
-                                        anchor: 'bottom-right',
-                                        direction: 'column',
-                                        justify: false,
-                                        translateX: 120,
-                                        translateY: 0,
-                                        itemsSpacing: 2,
-                                        itemWidth: 100,
-                                        itemHeight: 20,
-                                        itemDirection: 'left-to-right',
-                                        itemOpacity: 0.85,
-                                        symbolSize: 20,
-                                        effects: [
+                    <Grid container spacing={4}>
+                        <Grid item xs={12} md={6}>
+                    
+                            <Box my={4}>
+                                <h3>Weekly Expenses for the Month</h3>
+                                <div style={{ height: 400 }}>
+                                    <ResponsiveBar
+                                        data={weeklyExpensesData}
+                                        keys={['total_spent']}
+                                        indexBy="week"
+                                        margin={{ top: 50, right: 130, bottom: 50, left: 60 }}
+                                        padding={0.3}
+                                        valueScale={{ type: 'linear' }}
+                                        indexScale={{ type: 'band', round: true }}
+                                        colors={"#7dbddd"}
+                                        defs={[
                                             {
-                                                on: 'hover',
-                                                style: {
-                                                    itemOpacity: 1,
-                                                },
+                                                id: 'lines',
+                                                type: 'patternLines',
+                                                background: 'inherit',
+                                                color: '#eed312',
+                                                rotation: -45,
+                                                lineWidth: 6,
+                                                spacing: 10,
                                             },
-                                        ],
-                                    },
-                                ]}
-                                role="application"
-                                ariaLabel="Nivo bar chart demo"
-                                barAriaLabel={function (e) {
-                                    return e.id + ': ' + e.formattedValue + ' in week: ' + e.indexValue;
-                                }}
-                                tooltip={({ id, value, indexValue }) => (
-                                    <div style={{ background: 'white', padding: '5px', border: '1px solid #ccc' }}>
-                                        <strong>{id}</strong>
-                                        <br />
-                                        Week: {indexValue}
-                                        <br />
-                                        Amount: ${value}
-                                    </div>
-                                )}
-                            />
-                        </div>
-                    </Box>
-                    <Box my={4}>
-                        <h3>Spending by Category</h3>
-                        <div style={{ height: 400 }}>
-                            <ResponsivePie
-                                data={spendingByCategoryData}
-                                margin={{ top: 40, right: 80, bottom: 80, left: 80 }}
-                                innerRadius={0.5}
-                                padAngle={0.7}
-                                cornerRadius={3}
-                                colors={customColors}
-                                borderWidth={1}
-                                borderColor={{ from: 'color', modifiers: [['darker', 0.6]] }}
-                                radialLabelsSkipAngle={10}
-                                radialLabelsTextColor="#333333"
-                                radialLabelsLinkColor={{ from: 'color' }}
-                                sliceLabelsSkipAngle={10}
-                                sliceLabelsTextColor="#333333"
-                                theme={theme}
-                                legends={[
-                                    {
-                                        anchor: 'bottom',
-                                        direction: 'row',
-                                        justify: false,
-                                        translateX: 0,
-                                        translateY: 56,
-                                        itemsSpacing: 0,
-                                        itemWidth: 100,
-                                        itemHeight: 18,
-                                        itemTextColor: '#999',
-                                        itemDirection: 'left-to-right',
-                                        itemOpacity: 1,
-                                        symbolSize: 18,
-                                        symbolShape: 'circle',
-                                        effects: [
+                                        ]}
+                                        borderColor={{ from: 'color', modifiers: [['darker', 1.6]] }}
+                                        axisTop={null}
+                                        axisRight={null}
+                                        axisBottom={{
+                                            tickSize: 5,
+                                            tickPadding: 5,
+                                            tickRotation: 0,
+                                            legendPosition: 'middle',
+                                            legendOffset: 32,
+                                        }}
+                                        axisLeft={{
+                                            tickSize: 5,
+                                            tickPadding: 5,
+                                            tickRotation: 0,
+                                            legendPosition: 'middle',
+                                            legendOffset: -40,
+                                        }}
+                                        labelSkipWidth={12}
+                                        labelSkipHeight={12}
+                                        labelTextColor={{ from: 'color', modifiers: [['darker', 1.6]] }}
+                                        theme={theme}
+                                        legends={[
                                             {
-                                                on: 'hover',
-                                                style: {
-                                                    itemTextColor: '#000',
-                                                },
+                                                dataFrom: 'keys',
+                                                anchor: 'bottom-right',
+                                                direction: 'column',
+                                                justify: false,
+                                                translateX: 120,
+                                                translateY: 0,
+                                                itemsSpacing: 2,
+                                                itemWidth: 100,
+                                                itemHeight: 20,
+                                                itemDirection: 'left-to-right',
+                                                itemOpacity: 0.85,
+                                                symbolSize: 20,
+                                                effects: [
+                                                    {
+                                                        on: 'hover',
+                                                        style: {
+                                                            itemOpacity: 1,
+                                                        },
+                                                    },
+                                                ],
                                             },
-                                        ],
-                                    },
-                                ]}
+                                        ]}
+                                        role="application"
+                                        ariaLabel="Nivo bar chart demo"
+                                        barAriaLabel={function (e) {
+                                            return e.id + ': ' + e.formattedValue + ' in week: ' + e.indexValue;
+                                        }}
+                                        tooltip={({ id, value, indexValue }) => (
+                                            <div style={{ background: 'white', padding: '5px', border: '1px solid #ccc' }}>
+                                                <strong>{id}</strong>
+                                                <br />
+                                                Week: {indexValue}
+                                                <br />
+                                                Amount: ${value}
+                                            </div>
+                                        )}
+                                    />
+                                </div>
+                            </Box>
+                    </Grid>
+                    <Grid item xs={12} md={6}>
+                        <Box my={4}>
+                                <h3>Spending by Category</h3>
+                                <div style={{ height: 400 }}>
+                                    <ResponsivePie
+                                        data={spendingByCategoryData}
+                                        margin={{ top: 40, right: 80, bottom: 80, left: 80 }}
+                                        innerRadius={0.5}
+                                        padAngle={0.7}
+                                        cornerRadius={3}
+                                        colors={customColors}
+                                        borderWidth={1}
+                                        borderColor={{ from: 'color', modifiers: [['darker', 0.6]] }}
+                                        radialLabelsSkipAngle={10}
+                                        radialLabelsTextColor="#333333"
+                                        radialLabelsLinkColor={{ from: 'color' }}
+                                        sliceLabelsSkipAngle={10}
+                                        sliceLabelsTextColor="#333333"
+                                        theme={theme}
+                                        legends={[
+                                            {
+                                                anchor: 'bottom',
+                                                direction: 'row',
+                                                justify: false,
+                                                translateX: 0,
+                                                translateY: 56,
+                                                itemsSpacing: 0,
+                                                itemWidth: 100,
+                                                itemHeight: 18,
+                                                itemTextColor: '#999',
+                                                itemDirection: 'left-to-right',
+                                                itemOpacity: 1,
+                                                symbolSize: 18,
+                                                symbolShape: 'circle',
+                                                effects: [
+                                                    {
+                                                        on: 'hover',
+                                                        style: {
+                                                            itemTextColor: '#000',
+                                                        },
+                                                    },
+                                                ],
+                                            },
+                                        ]}
 
-                            />
-                        </div>
-                    </Box>
+                                    />
+                                </div>
+                            </Box>
+                        </Grid>
+                    </Grid>
                 </div>
             </div>
         </div>
