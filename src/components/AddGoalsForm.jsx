@@ -25,7 +25,7 @@ const AddGoalsForm = () => {
                 </div>
                 <div className="grid-xs">
                     <label htmlFor="targetAmount">Target Amount</label>
-                    <input type="number" name="targetAmount" id="targetAmount" placeholder="e.g. 10000" step="0.01" required />
+                    <input type="number" name="targetAmount" id="targetAmount" placeholder="e.g. 10000" step="0.01" min="0" required />
                 </div>
                 <input type="hidden" name="_action" value="createGoal" />
                 <button type="submit" className="btn btn--dark" disabled={isSubmitting}>
