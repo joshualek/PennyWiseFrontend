@@ -228,10 +228,16 @@ p {
 
 .flex-spread {
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-start;
   align-items: start;
   flex-wrap: wrap;
   gap: var(--space-md);
+}
+
+.flex-spread > * {
+  flex: 1 1 calc(25% - var(--space-md)); /* 25% width minus the gap */
+  max-width: calc(25% - var(--space-md)); /* Ensure max width is 25% minus the gap */
+  box-sizing: border-box; /* Include padding and border in the element's total width and height */
 }
 
 .flex-spread.center-last-row {

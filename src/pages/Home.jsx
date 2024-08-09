@@ -196,13 +196,15 @@ const Home = () => {
                                         <div className="content-box-boxed">
                                             <div style={{ width: '100%', padding: '20px' }}>
                                                 <h3 style={{ marginBottom: '20px' }}>Goals</h3>
-                                                {goalsList && goalsList.length > 0 ? (
-                                                    goalsList.slice(0, 4).map((goal) => (
-                                                        <GoalItemMini key={goal.id} goal={goal} className="content-box" />
-                                                    ))
-                                                ) : (
-                                                    <p>No goals available</p>
-                                                )}
+                                                <div>
+                                                    {goalsList && goalsList.length > 0 ? (
+                                                        goalsList.slice(0, 4).map((goal) => (
+                                                            <GoalItemMini key={goal.id} goal={goal} className="content-box" />
+                                                        ))
+                                                    ) : (
+                                                        <p>No goals available</p>
+                                                    )}
+                                                </div>
                                             </div>
                                         </div>
                                     </div>

@@ -67,7 +67,7 @@ const GoalItemMini = ({ goal }) => {
 
     return (
         <Card 
-            sx={{ height: `calc(100% / 5)`, borderRadius: "20px", marginTop: "16px" }}
+            sx={{ height: `calc(100% / 4)`, borderRadius: "20px", marginTop: "16px" }}
             className="content-box">
             <CardActionArea onClick={handleClick}>
                 <CardContent>
