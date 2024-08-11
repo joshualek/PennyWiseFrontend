@@ -1,13 +1,13 @@
-import React, { useState, useEffect, useRef } from "react"
-import { Link, Form, useFetcher, useLoaderData, useNavigate, } from "react-router-dom"
+import React, { useState } from "react"
+import { useLoaderData } from "react-router-dom"
 
 // Library
 import { Bars3Icon } from '@heroicons/react/24/solid'
 
 // Components
-import Sidebar from "../components/Sidebar"
-import StudentDiscountCard from "../components/StudentDiscountCard"
-import Nav from "../components/Nav"
+import Sidebar from "../components/nav/Sidebar"
+import StudentDiscountCard from "../components/cards/StudentDiscountCard"
+import Nav from "../components/nav/Nav"
 
 // Helper functions
 import { fetchData, fetchDataDjango } from "../helpers"

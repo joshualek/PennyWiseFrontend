@@ -7,12 +7,12 @@ import { toast } from "react-toastify"
 import MenuIcon from '@mui/icons-material/Menu';
 
 // Components
-import Sidebar from "../components/Sidebar"
-import Nav from "../components/Nav"
-import AddBudgetForm from "../components/AddBudgetForm"
-import AddExpenseForm from "../components/AddExpenseForm"
-import AddIncomeForm from "../components/AddIncomeForm"
-import BudgetItem from "../components/BudgetItem"
+import Sidebar from "../components/nav/Sidebar"
+import Nav from "../components/nav/Nav"
+import AddBudgetForm from "../components/forms/AddBudgetForm"
+import AddExpenseForm from "../components/forms/AddExpenseForm"
+import AddIncomeForm from "../components/forms/AddIncomeForm"
+import BudgetItem from "../components/budgetIncomeExpense/BudgetItem"
 import Table from "../components/Table"
 import IncomeTable from "../components/IncomeTable"
 import ExportButton from "../components/ExportButton";

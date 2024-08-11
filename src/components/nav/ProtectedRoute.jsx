@@ -1,8 +1,8 @@
 import { useState, useEffect } from "react";
 import { Navigate } from "react-router-dom";
 import { jwtDecode } from "jwt-decode";
-import api from "../api";
-import { REFRESH_TOKEN, ACCESS_TOKEN } from "../constants";
+import api from "../../api";
+import { REFRESH_TOKEN, ACCESS_TOKEN } from "../../constants";
 
 // Create a protected route that only allows access to authenticated users, else get them to login
 function ProtectedRoute({children})  {

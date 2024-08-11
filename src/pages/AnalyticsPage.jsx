@@ -4,14 +4,13 @@ import { useLoaderData } from "react-router-dom";
 // Library
 import { ResponsiveBar } from '@nivo/bar';
 import { ResponsivePie } from '@nivo/pie';
-import { Box, Grid, Select, MenuItem, FormControl, InputLabel, useTheme } from '@mui/material';
+import { Box, Grid, Select, MenuItem, FormControl, InputLabel } from '@mui/material';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
 
 // Components
-import Sidebar from "../components/Sidebar";
-import Nav from "../components/Nav";
-import AnalyticsBox from "../components/AnalyticsBox";
-import Piechart from "../components/charts/Piechart";
+import Sidebar from "../components/nav/Sidebar";
+import Nav from "../components/nav/Nav";
+import AnalyticsBox from "../components/cards/AnalyticsBox";
 
 
 // Helper functions

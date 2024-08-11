@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import { UserPlusIcon } from "@heroicons/react/24/solid";
-import Nav from "../components/Nav";
+import Nav from "../components/nav/Nav";
 import illustration from "../assets/illustration.jpg";
 
 const Intro = () => {

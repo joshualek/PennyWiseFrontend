@@ -1,13 +1,10 @@
 import React, { useState } from "react"
 import { Link, useLoaderData } from "react-router-dom"
 
-// library
-import { toast } from "react-toastify"
-
 // Components
-import Sidebar from "../components/Sidebar"
+import Sidebar from "../components/nav/Sidebar"
 import IncomeTable from "../components/IncomeTable"
-import Nav from "../components/Nav"
+import Nav from "../components/nav/Nav"
 
 // Helpers
 import { fetchData, fetchDataDjango } from "../helpers"

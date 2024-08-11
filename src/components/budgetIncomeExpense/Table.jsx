@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import ExpenseItem from './ExpenseItem';
+import ExpenseItem from './budgetIncomeExpense/ExpenseItem';
 import "../styles/Table.css";
 
 const Table = ({ expenses, categories = [] }) => {

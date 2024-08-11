@@ -3,7 +3,7 @@ import { Link, useFetcher } from "react-router-dom"
 import { toast } from "react-toastify"
 
 // helpers
-import { calculateSpentByBudget, deleteItem, formatCurrency, getBudgetsArray } from "../helpers"
+import { calculateSpentByBudget, deleteItem, formatCurrency, getBudgetsArray } from "../../helpers"
 
 // Heroicons
 import { TrashIcon } from "@heroicons/react/24/solid"

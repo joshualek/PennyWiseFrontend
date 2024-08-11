@@ -7,7 +7,7 @@ import { TrashIcon } from "@heroicons/react/24/solid"
 import { CardActionArea } from '@mui/material';
 
 // Helpers
-import { calculateSpentByBudget, deleteItem, formatPercentage, formatCurrency, getBudgetsArray, fetchExpensesByBudgetId } from "../helpers"
+import { calculateSpentByBudget, deleteItem, formatPercentage, formatCurrency, getBudgetsArray, fetchExpensesByBudgetId } from "../../helpers"
 
 
 const deleteBudget = async (budgetId, navigate) => {

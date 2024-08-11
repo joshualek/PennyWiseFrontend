@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useFetcher } from "react-router-dom";
 import { CurrencyDollarIcon, TrashIcon } from "@heroicons/react/24/solid";
-import { formatCurrency } from "../helpers";
+import { formatCurrency } from "../../helpers";
 
 const GoalItem = ({ goal, updateGoals }) => {
     const fetcher = useFetcher();

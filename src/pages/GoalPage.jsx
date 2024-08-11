@@ -5,10 +5,10 @@ import { useLoaderData } from "react-router-dom";
 import { toast } from "react-toastify"
 
 // Components
-import AddGoalsForm from "../components/AddGoalsForm";
-import GoalItem from "../components/GoalItem";
-import Sidebar from "../components/Sidebar";
-import Nav from "../components/Nav";
+import AddGoalsForm from "../components/forms/AddGoalsForm";
+import GoalItem from "../components/cards/GoalItem";
+import Sidebar from "../components/nav/Sidebar";
+import Nav from "../components/nav/Nav";
 import MenuIcon from '@mui/icons-material/Menu';
 
 // Helpers

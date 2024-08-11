@@ -13,13 +13,13 @@ import { ResponsiveContainer } from 'recharts';
 
 
 // Components
-import Sidebar from "../components/Sidebar";
-import Nav from "../components/Nav";
-import StatBox from "../components/StatBox";
-import StudentDiscountCard from "../components/StudentDiscountCard"
+import Sidebar from "../components/nav/Sidebar";
+import Nav from "../components/nav/Nav";
+import StatBox from "../components/cards/StatBox";
+import StudentDiscountCard from "../components/cards/StudentDiscountCard"
 import Barchart from "../components/charts/Barchart";
 import Piechart from "../components/charts/Piechart";
-import GoalItemMini from "../components/GoalItemMini";
+import GoalItemMini from "../components/cards/GoalItemMini";
 
 // Pages
 import Intro from "../pages/Intro";

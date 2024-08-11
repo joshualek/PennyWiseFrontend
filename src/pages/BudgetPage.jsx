@@ -5,11 +5,11 @@ import { useLoaderData } from "react-router-dom"
 import { toast } from "react-toastify"
 
 // Components
-import AddExpenseForm from "../components/AddExpenseForm"
-import BudgetItem from "../components/BudgetItem"
-import Sidebar from "../components/Sidebar"
+import AddExpenseForm from "../components/forms/AddExpenseForm"
+import BudgetItem from "../components/budgetIncomeExpense/BudgetItem"
+import Sidebar from "../components/nav/Sidebar"
 import Table from "../components/Table"
-import Nav from "../components/Nav"
+import Nav from "../components/nav/Nav"
 
 // Helpers
 import { calculateSpentByBudget, createExpense, fetchData, fetchDataDjango, fetchExpensesByBudgetId } from "../helpers"

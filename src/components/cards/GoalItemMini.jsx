@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import { Card, CardActionArea, CardContent, Box, LinearProgress, Typography } from '@mui/material';
 
 // Helpers
-import { formatCurrency } from "../helpers";
+import { formatCurrency } from "../../helpers";
 
 const GoalItemMini = ({ goal }) => {
 
