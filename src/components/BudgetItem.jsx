@@ -1,12 +1,10 @@
 import { useEffect, useState } from "react"
-import { Form, Link, useNavigate } from "react-router-dom"
+import { Form, useNavigate } from "react-router-dom"
 
 // Library
 import { toast } from "react-toastify";
-import { BanknotesIcon } from "@heroicons/react/24/outline"
 import { TrashIcon } from "@heroicons/react/24/solid"
-import { Card, CardActionArea, Box, Typography } from '@mui/material';
-import { createTheme, ThemeProvider } from '@mui/material/styles';
+import { CardActionArea } from '@mui/material';
 
 // Helpers
 import { calculateSpentByBudget, deleteItem, formatPercentage, formatCurrency, getBudgetsArray, fetchExpensesByBudgetId } from "../helpers"

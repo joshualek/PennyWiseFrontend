@@ -3,7 +3,6 @@ import { useNavigate } from 'react-router-dom';
 
 // Libraries
 import { Card, CardActionArea, CardContent, Box, LinearProgress, Typography } from '@mui/material';
-import { createTheme, ThemeProvider } from '@mui/material/styles';
 
 // Helpers
 import { formatCurrency } from "../helpers";

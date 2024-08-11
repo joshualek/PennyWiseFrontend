@@ -13,7 +13,6 @@ import AddBudgetForm from "../components/AddBudgetForm"
 import AddExpenseForm from "../components/AddExpenseForm"
 import AddIncomeForm from "../components/AddIncomeForm"
 import BudgetItem from "../components/BudgetItem"
-import IncomeItem from "../components/IncomeItem"
 import Table from "../components/Table"
 import IncomeTable from "../components/IncomeTable"
 import ExportButton from "../components/ExportButton";
