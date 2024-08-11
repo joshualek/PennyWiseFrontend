@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import { useFetcher } from "react-router-dom";
 import { CurrencyDollarIcon, TrashIcon } from "@heroicons/react/24/solid";
 import { formatCurrency, fetchData, getGoalsArray } from "../helpers";
-import styles from "../styles/GoalItemStyles.js";
 
 const GoalItem = ({ goal, updateGoals }) => {
     const fetcher = useFetcher();
@@ -132,5 +131,106 @@ const GoalItem = ({ goal, updateGoals }) => {
     );
 };
 
+const styles = {
+    goalItem: {
+        border: '1px solid #ccc',
+        borderRadius: '25px',
+        padding: '16px',
+        margin: '8px 0',
+        backgroundColor: `var(--bkg)`,
+        width: `calc(100% / 4.5)`,
+    },
+    progressText: {
+        display: 'flex',
+        justifyContent: 'space-between',
+        alignItems: 'center',
+        marginBottom: '8px',
+    },
+    goalName: {
+        fontSize: '1.2rem',
+        fontWeight: 'bold',
+    },
+    goalTarget: {
+        fontSize: '0.875rem',
+        color: '#1a6299',
+    },
+    progressBarContainer: {
+        width: '100%',
+        backgroundColor: '#eee',
+        borderRadius: '20px',
+        overflow: 'hidden',
+        height: '24px',
+        margin: '10px 0 10px 0',
+        position: 'relative',
+    },
+    progressBar: {
+        height: '100%',
+        color: '#fff',
+        textAlign: 'center',
+        lineHeight: '24px',
+        fontSize: '0.875rem',
+        borderRadius: '20px',
+        transition: 'width 0.3s ease-in-out',
+    },
+    progressDetails: {
+        display: 'flex',
+        justifyContent: 'space-between',
+        alignItems: 'center',
+        marginBottom: '16px',
+    },
+    amountSaved: {
+        fontSize: '1rem',
+        fontWeight: 'bold',
+    },
+    amountRemaining: {
+        fontSize: '1rem',
+        fontWeight: 'bold',
+    },
+    form: {
+        display: 'flex',
+        flexDirection: 'column',
+        marginBottom: '16px',
+    },
+    label: {
+        marginBottom: '4px',
+        fontSize: '0.875rem',
+    },
+    input: {
+        marginBottom: '8px',
+        padding: '8px',
+        fontSize: '1rem',
+        borderRadius: '4px',
+        border: '1px solid #ccc',
+    },
+    button: {
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        gap: '8px',
+        padding: '8px',
+        backgroundColor: '#333',
+        color: '#fff',
+        borderRadius: '20px',
+        border: 'none',
+        cursor: 'pointer',
+    },
+    redeemButton: {
+        backgroundColor: '#28a745',
+        color: '#fff',
+        padding: '8px',
+        borderRadius: '20px',
+        border: 'none',
+        cursor: 'pointer',
+        marginBottom: '8px',
+    },
+    deleteButton: {
+        backgroundColor: '#dc3545',
+        color: '#fff',
+        padding: '8px',
+        borderRadius: '20px',
+        border: 'none',
+        cursor: 'pointer',
+    },
+};
 
 export default GoalItem;
