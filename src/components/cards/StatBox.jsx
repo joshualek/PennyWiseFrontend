@@ -1,7 +1,7 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom'; 
 import { Card, CardActionArea, Box, Typography } from '@mui/material';
-import ProgressCircle from "../ProgressCircle";
+import ProgressCircle from "./ProgressCircle";
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 
 // Override to prevent a grey background from appearing when hovering on the card

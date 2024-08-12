@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 
 // Styles
-import "../styles/Sidebar.css";
+import "../../styles/Sidebar.css";
 
 // Libraries
 import HomeIcon from '@mui/icons-material/Home';

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import ExpenseItem from './budgetIncomeExpense/ExpenseItem';
-import "../styles/Table.css";
+import ExpenseItem from './ExpenseItem';
+import "../../styles/Table.css";
 
 const Table = ({ expenses, categories = [] }) => {
     const [filterCategory, setFilterCategory] = useState("");

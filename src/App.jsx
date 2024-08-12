@@ -12,7 +12,7 @@ import { logoutAction } from "./actions/logout";
 import { deleteBudget } from "./actions/deleteBudget";
 
 // Routes
-import ProtectedRoute from "./components/ProtectedRoute";
+import ProtectedRoute from "./components/nav/ProtectedRoute";
 import Dashboard, { dashboardAction, dashboardLoader } from "./pages/Dashboard";
 import BudgetPage, { budgetAction, budgetLoader } from "./pages/BudgetPage";
 import ExpensesPage, { expensesAction, expensesLoader } from "./pages/ExpensesPage";

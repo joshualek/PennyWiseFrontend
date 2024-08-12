@@ -3,7 +3,7 @@ import { toast } from "react-toastify"
 
 
 // helpers
-import { formatCurrency, deleteItem } from "../helpers";
+import { formatCurrency, deleteItem } from "../../helpers";
 
 // Heroicons
 import { TrashIcon } from "@heroicons/react/24/solid";

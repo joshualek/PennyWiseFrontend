@@ -5,9 +5,9 @@ import { Link, useLoaderData } from "react-router-dom"
 import { toast } from "react-toastify"
 
 // Components
-import Sidebar from "../components/Sidebar"
-import Table from "../components/Table"
-import Nav from "../components/Nav"
+import Sidebar from "../components/nav/Sidebar"
+import Table from "../components/budgetIncomeExpense/Table"
+import Nav from "../components/nav/Nav"
 
 // Helpers
 import { fetchData, fetchDataDjango } from "../helpers"

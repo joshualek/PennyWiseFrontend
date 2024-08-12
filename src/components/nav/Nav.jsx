@@ -1,7 +1,7 @@
 import { Form, NavLink } from "react-router-dom"
 
 // Assets
-import logomark from "../assets/logomark.svg"
+import logomark from "../../assets/logomark.svg"
 
 // Heroicons
 import { LockClosedIcon } from "@heroicons/react/24/outline"

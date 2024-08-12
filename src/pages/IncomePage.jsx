@@ -3,7 +3,7 @@ import { Link, useLoaderData } from "react-router-dom"
 
 // Components
 import Sidebar from "../components/nav/Sidebar"
-import IncomeTable from "../components/IncomeTable"
+import IncomeTable from "../components/budgetIncomeExpense/IncomeTable"
 import Nav from "../components/nav/Nav"
 
 // Helpers

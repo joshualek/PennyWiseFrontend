@@ -8,7 +8,7 @@ import { toast } from "react-toastify"
 import AddExpenseForm from "../components/forms/AddExpenseForm"
 import BudgetItem from "../components/budgetIncomeExpense/BudgetItem"
 import Sidebar from "../components/nav/Sidebar"
-import Table from "../components/Table"
+import Table from "../components/budgetIncomeExpense/Table"
 import Nav from "../components/nav/Nav"
 
 // Helpers
